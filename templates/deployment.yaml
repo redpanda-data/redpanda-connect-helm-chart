@@ -53,7 +53,7 @@ spec:
               mountPath: "/benthos.yaml"
               readOnly: true
             {{- end }}
-            {{- if and .Values.http.tls.cert_file .Values.http.tls.key_file }}
+            {{- if and .Values.http.tls.certFile .Values.http.tls.keyFile }}
             - name: tls
               mountPath: "/"
               readOnly: true
@@ -76,7 +76,7 @@ spec:
           configMap:
             name: {{ template "benthos.fullname" . }}-config
         {{- end }}
-        {{- if and .Values.http.tls.cert_file .Values.http.tls.key_file }}
+        {{- if and .Values.http.tls.certFile .Values.http.tls.keyFile }}
         - name: tls
           secret:
             secretName: {{ template "benthos.fullname" . }}-tls

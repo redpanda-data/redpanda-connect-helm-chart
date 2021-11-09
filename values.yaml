@@ -83,6 +83,7 @@ affinity: {}
 
 # /benthos.yaml HTTP configuration
 http:
+  # Disabling HTTP server will prevent service and ingress objects from being created.
   enabled: true
   ### These are the current defaults for the following HTTP component parameters;
   ### uncomment and edit any that require adjustment
@@ -97,8 +98,8 @@ http:
   tls:
     enabled: false
     # Uncomment and provide path when .Values.http.tls.enabled is true
-    # cert_file: ""
-    # key_file: ""
+    # certFile: ""
+    # keyFile: ""
 
 
 # /benthos.yaml configuration

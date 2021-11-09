@@ -33,9 +33,9 @@ data:
           {{- end }}
         {{- end }}
       {{- end -}}
-      {{ if .tls.enabled }}
-      cert_file: {{ .tls.cert_file | required "tls cert file is required" }}
-      key_file: {{ .tls.key_file | required "tls key file is required" }}
+      {{ if eq .tls.enabled true }}
+      certFile: {{ .tls.certFile }}
+      keyFile: {{ .tls.keyFile }}
       {{- end -}}
   {{- end -}}
   {{ tpl .Values.config . | nindent 4 }}

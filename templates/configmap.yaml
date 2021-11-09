@@ -12,7 +12,7 @@ data:
   {{- with .Values.http }}
     http:
       enabled: true
-      {{ if .address }}
+      {{- if .address }}
       address: {{ .address | default "0.0.0.0:4195" }}
       {{- end -}}
       {{ if .read_timeout }}
@@ -27,15 +27,15 @@ data:
       {{ if .cors.enabled }}    
       cors:
         enabled: true
-        {{ if .cors.allowed_origins }}
+        {{- if .cors.allowed_origins }}
         allowed_origins: {{- range .cors.allowed_origins }}
-            - {{ . }}
+          - {{ . }}
           {{- end }}
         {{- end }}
       {{- end -}}
       {{ if .tls.enabled }}
-      cert_file: {{ .tls.cert_file | default "" }}
-      key_file: {{ .tls.key_file | default "" }}
+      cert_file: {{ .tls.cert_file | required "tls cert file is required" }}
+      key_file: {{ .tls.key_file | required "tls key file is required" }}
       {{- end -}}
   {{- end -}}
   {{ tpl .Values.config . | nindent 4 }}

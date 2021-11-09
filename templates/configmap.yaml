@@ -8,5 +8,36 @@ metadata:
     {{- include "benthos.labels" . | nindent 4 }}
 data:
   benthos.yaml: |-
-{{ tpl .Values.config . | nindent 4 }}
+  {{- if eq .Values.http.enabled true }}
+  {{- with .Values.http }}
+    http:
+      enabled: true
+      {{ if .address }}
+      address: {{ .address | default "0.0.0.0:4195" }}
+      {{- end -}}
+      {{ if .read_timeout }}
+      read_timeout: {{ .read_timeout | default "5s" }}
+      {{- end -}}
+      {{ if .root_path }}
+      root_path: {{ .root_path | default "/benthos" }}
+      {{- end -}}
+      {{ if .debug_endpoints }}
+      debug_endpoints: {{ .debug_endpoints | default false }}
+      {{- end -}}
+      {{ if .cors.enabled }}    
+      cors:
+        enabled: true
+        {{ if .cors.allowed_origins }}
+        allowed_origins: {{- range .cors.allowed_origins }}
+            - {{ . }}
+          {{- end }}
+        {{- end }}
+      {{- end -}}
+      {{ if .tls.enabled }}
+      cert_file: {{ .tls.cert_file | default "" }}
+      key_file: {{ .tls.key_file | default "" }}
+      {{- end -}}
+  {{- end -}}
+  {{ tpl .Values.config . | nindent 4 }}
+  {{- end -}}
 {{- end -}}

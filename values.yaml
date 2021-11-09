@@ -84,8 +84,8 @@ affinity: {}
 # /benthos.yaml HTTP configuration
 http:
   enabled: true
-  ### These are the current defaults for all HTTP component configuration;
-  ### uncomment and edit any parameters that require adjustment
+  ### These are the current defaults for the following HTTP component parameters;
+  ### uncomment and edit any that require adjustment
   # address: 0.0.0.0:4195
   # read_timeout: 5s
   # root_path: /benthos

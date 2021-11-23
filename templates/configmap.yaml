@@ -8,36 +8,34 @@ metadata:
     {{- include "benthos.labels" . | nindent 4 }}
 data:
   benthos.yaml: |-
-  {{- if eq .Values.http.enabled true }}
-  {{- with .Values.http }}
+  {{- if .Values.http.enabled }}
     http:
       enabled: true
-      {{- if .address }}
-      address: {{ .address | default "0.0.0.0:4195" }}
+      {{- if .Values.http.address }}
+      address: {{ .Values.http.address | default "0.0.0.0:4195" }}
       {{- end -}}
-      {{ if .read_timeout }}
-      read_timeout: {{ .read_timeout | default "5s" }}
+      {{ if .Values.http.readTimeout }}
+      read_timeout: {{ .Values.http.readTimeout | default "5s" }}
       {{- end -}}
-      {{ if .root_path }}
-      root_path: {{ .root_path | default "/benthos" }}
+      {{ if .Values.http.rootPath }}
+      root_path: {{ .Values.http.rootPath | default "/benthos" }}
       {{- end -}}
-      {{ if .debug_endpoints }}
-      debug_endpoints: {{ .debug_endpoints | default false }}
+      {{ if .Values.http.debugEndpoints }}
+      debug_endpoints: {{ .Values.http.debugEndpoints | default false }}
       {{- end -}}
-      {{ if .cors.enabled }}    
+      {{ if .Values.http.cors.enabled }}    
       cors:
         enabled: true
-        {{- if .cors.allowed_origins }}
-        allowed_origins: {{- range .cors.allowed_origins }}
+        {{- if .Values.http.cors.allowedOrigins }}
+        allowed_origins: {{- range .Values.http.cors.allowedOrigins }}
           - {{ . }}
           {{- end }}
         {{- end }}
       {{- end -}}
-      {{ if eq .tls.enabled true }}
-      certFile: {{ .tls.certFile }}
-      keyFile: {{ .tls.keyFile }}
+      {{ if and .Values.http.tls.enabled .Values.http.tls.secretName }}
+      cert_file: "/tls/tls.crt"
+      key_file: "/tls/tls.key"
       {{- end -}}
-  {{- end -}}
   {{ tpl .Values.config . | nindent 4 }}
   {{- end -}}
 {{- end -}}

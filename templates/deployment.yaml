@@ -51,11 +51,12 @@ spec:
             {{- if .Values.config }}
             - name: config
               mountPath: "/benthos.yaml"
+              subPath: "benthos.yaml"
               readOnly: true
             {{- end }}
-            {{- if and .Values.http.tls.certFile .Values.http.tls.keyFile }}
+            {{- if and .Values.http.tls.enabled .Values.http.tls.secretName }}
             - name: tls
-              mountPath: "/"
+              mountPath: "/tls"
               readOnly: true
             {{- end }}
       {{- with .Values.nodeSelector }}
@@ -76,13 +77,8 @@ spec:
           configMap:
             name: {{ template "benthos.fullname" . }}-config
         {{- end }}
-        {{- if and .Values.http.tls.certFile .Values.http.tls.keyFile }}
+        {{- if and .Values.http.tls.enabled .Values.http.tls.secretName }}
         - name: tls
           secret:
-            secretName: {{ template "benthos.fullname" . }}-tls
-            items:
-            - key: tls.crt
-              path: tls.crt
-            - key: tls.key
-              path: tls.key
+            secretName: {{ .Values.http.tls.secretName }}
         {{- end }}

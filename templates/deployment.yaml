@@ -41,19 +41,30 @@ spec:
             httpGet:
               path: /ping
               port: http
+              {{- if .Values.http.tls.enabled }}
+              scheme: HTTPS
+              {{- end }}
           readinessProbe:
             httpGet:
               path: /ping
               port: http
+              {{- if .Values.http.tls.enabled }}
+              scheme: HTTPS
+              {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- if .Values.config }}
           volumeMounts:
+            {{- if .Values.config }}
             - name: config
               mountPath: "/benthos.yaml"
               subPath: "benthos.yaml"
               readOnly: true
-          {{- end }}
+            {{- end }}
+            {{- if and .Values.http.tls.enabled .Values.http.tls.secretName }}
+            - name: tls
+              mountPath: "/tls"
+              readOnly: true
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -66,9 +77,14 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.config }}
       volumes:
+        {{- if .Values.config }}
         - name: config
           configMap:
             name: {{ template "benthos.fullname" . }}-config
-      {{- end }}
+        {{- end }}
+        {{- if and .Values.http.tls.enabled .Values.http.tls.secretName }}
+        - name: tls
+          secret:
+            secretName: {{ .Values.http.tls.secretName }}
+        {{- end }}

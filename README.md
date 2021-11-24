@@ -47,6 +47,8 @@ Benthos can be instructed to serve all endpoints exlusively over HTTPS.  This me
 - Set `service.port` to 443 in values.yaml
 - Create a Kubernetes secret in the targeted namespace of type `kubernetes.io/tls`
 
+When TLS is enabled, the Kubernetes readiness and liveness probes will operate over HTTPS to the same container port (default 4195).
+
 ## Config
 
 The config parameter should contain the configuration as it would be parsed by the Benthos binary.

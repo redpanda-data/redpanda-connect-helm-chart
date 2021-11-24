@@ -27,7 +27,7 @@ Then `helm search repo benthos` for all charts.
 
 ### Benthos Parameters
 
-For more information on configuring the HTTP component, refer to the [Benthos HTTP component documentation](https://www.benthos.dev/docs/components/http/about).  
+For more information on configuring the HTTP component, refer to the [Benthos HTTP component documentation](https://www.benthos.dev/docs/components/http/about).
 | Name                     | Description                           | Value        |
 |--------------------------|---------------------------------------|--------------|
 | http.enabled             | Enables the HTTP server component     | true         |

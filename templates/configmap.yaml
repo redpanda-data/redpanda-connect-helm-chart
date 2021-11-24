@@ -23,7 +23,7 @@ data:
       {{ if .Values.http.debugEndpoints }}
       debug_endpoints: {{ .Values.http.debugEndpoints | default false }}
       {{- end -}}
-      {{ if .Values.http.cors.enabled }}    
+      {{ if .Values.http.cors.enabled }}
       cors:
         enabled: true
         {{- if .Values.http.cors.allowedOrigins }}

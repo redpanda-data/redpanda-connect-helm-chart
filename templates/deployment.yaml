@@ -41,10 +41,16 @@ spec:
             httpGet:
               path: /ping
               port: http
+              {{- if .Values.http.tls.enabled }}
+              scheme: HTTPS
+              {{- end }}
           readinessProbe:
             httpGet:
               path: /ping
               port: http
+              {{- if .Values.http.tls.enabled }}
+              scheme: HTTPS
+              {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

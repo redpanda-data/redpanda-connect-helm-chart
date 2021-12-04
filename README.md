@@ -23,23 +23,25 @@ Then `helm search repo benthos` for all charts.
 | image.tag        | Docker image tag override     | ""              |
 | imagePullSecrets | Docker registry secrets array | []              |
 | service.type     | Kubernetes service type       | ClusterIP       |
-| service.port     | Kubernetes service port       | 80              |
+| service.ports    | Kubernetes service ports      | []              |
 
 ### Benthos Parameters
 
 For more information on configuring the HTTP component, refer to the [Benthos HTTP component documentation](https://www.benthos.dev/docs/components/http/about).
-| Name                     | Description                           | Value        |
-|--------------------------|---------------------------------------|--------------|
-| http.enabled             | Enables the HTTP server component     | true         |
-| http.address             | HTTP server component binding address | 0.0.0.0:4195 |
-| http.readTimeout         | HTTP server component read timeout    | 5s           |
-| http.rootPath            | General Benthos HTTP endpoint prefix  | /benthos     |
-| http.debugEndpoints      | Enables debugging endpoints           | false        |
-| http.cors.enabled        | Enables Cross-Origin Resource Sharing | false        |
-| http.cors.allowedOrigins | Allowed source domains for CORS       | ""           |
-| http.tls.enabled         | Enables TLS for all Benthos endpoints | false        |
-| http.tls.secretName      | `kubernetes.io/tls` secret name       | ""           |
-| config                   | Benthos component configuration       | ""           |
+| Name                     | Description                                        | Value        |
+|--------------------------|----------------------------------------------------|--------------|
+| http.enabled             | Enables the HTTP server component                  | true         |
+| http.address             | HTTP server component binding address              | 0.0.0.0:4195 |
+| http.readTimeout         | HTTP server component read timeout                 | 5s           |
+| http.rootPath            | General Benthos HTTP endpoint prefix               | /benthos     |
+| http.debugEndpoints      | Enables debugging endpoints                        | false        |
+| http.cors.enabled        | Enables Cross-Origin Resource Sharing              | false        |
+| http.cors.allowedOrigins | Allowed source domains for CORS                    | ""           |
+| http.tls.enabled         | Enables TLS for all Benthos endpoints              | false        |
+| http.tls.secretName      | `kubernetes.io/tls` secret name                    | ""           |
+| extraVolumes             | Additional volumes for configMaps and secrets      | []           |
+| extraVolumeMounts        | Additional volumeMounts for configMaps and secrets | []           |
+| config                   | Benthos component configuration                    | ""           |
 
 ## TLS
 

@@ -8,7 +8,7 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-  {{ range .Values.service.ports }}
+  {{- range .Values.service.ports }}
     -
       {{- range $key, $val := . }}
       {{ $key }}: {{ tpl (toString $val) $ }}

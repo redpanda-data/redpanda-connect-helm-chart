@@ -65,6 +65,11 @@ spec:
               mountPath: "/tls"
               readOnly: true
             {{- end }}
+            {{- range .Values.extraVolumeMounts }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+              readOnly: {{ .readOnly }}
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -87,4 +92,15 @@ spec:
         - name: tls
           secret:
             secretName: {{ .Values.http.tls.secretName }}
+        {{- end }}
+        {{- range .Values.extraVolumes }}
+        - name: {{ .name }}
+          {{- if .configMap }}
+          configMap:
+            name: {{ .configMap.name }}
+          {{- end }}
+          {{- if .secret }}
+          secret:
+            secretName: {{ .secret.secretName }}
+          {{- end }}
         {{- end }}

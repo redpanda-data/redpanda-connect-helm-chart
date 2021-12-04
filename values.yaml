@@ -91,7 +91,21 @@ tolerations: []
 affinity: {}
 
 extraVolumes: []
+  # - name: config-map
+  #   configMap:
+  #     name: cm-name
+  # - name: secret
+  #   secret:
+  #     secretName: s-name
+
 extraVolumeMounts: []
+  # - name: config-map
+  #   mountPath: /mnt/configmap
+  #   readOnly: true
+  # - name: secret
+  #   mountPath: /mnt/secret
+  #   readOnly: true
+
 
 # /benthos.yaml HTTP configuration
 http:

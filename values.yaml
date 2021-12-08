@@ -106,8 +106,23 @@ extraVolumeMounts: []
   #   mountPath: /mnt/secret
   #   readOnly: true
 
+streams:
+  enabled: false
+  # streamsConfigMap: ""
+  ### WORKAROUND WARNING
+  ### Benthos does not yet support wildcards for stream config files.  See https://github.com/Jeffail/benthos/issues/994
+  ###
+  ### The filenames could be derived using Helm's lookup function, but this will cause issues with installations using ArgoCD,
+  ### see https://github.com/argoproj/argo-cd/issues/5202.  To avoid this and until wildcard support is implemented, add
+  ### all streams config file names (keys directly subordinate to the data block in the configMap) here to populate 
+  ### the command passed to the container.
+  ### TODO refactor when #994 is resolved
+  # streamConfigFilenames:
+  #   - foo.yaml
+  #   - bar.yaml
+  #   - baz.yaml
 
-# /benthos.yaml HTTP configuration
+  # /benthos.yaml HTTP configuration
 http:
   # Disabling HTTP server will prevent service and ingress objects from being created.
   enabled: true
@@ -127,13 +142,5 @@ http:
     # secretName: ""
 
 # /benthos.yaml configuration
-config: |-
-  input:
-    label: "no_config_in"
-    generate:
-      mapping: root = "This Benthos instance is unconfigured!"
-      interval: 1m
-  output:
-    label: "no_config_out"
-    stdout:
-      codec: lines
+config: |
+  

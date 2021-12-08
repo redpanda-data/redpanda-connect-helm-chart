@@ -1,4 +1,3 @@
-{{- if .Values.config -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -7,7 +6,7 @@ metadata:
   labels:
     {{- include "benthos.labels" . | nindent 4 }}
 data:
-  benthos.yaml: |-
+  benthos.yaml: |
   {{- if .Values.http.enabled }}
     http:
       enabled: true
@@ -36,6 +35,17 @@ data:
       cert_file: "/tls/tls.crt"
       key_file: "/tls/tls.key"
       {{- end -}}
-  {{ tpl .Values.config . | nindent 4 }}
+    {{- if and .Values.config (ne .Values.streams.enable true) }}
+    {{- tpl .Values.config . | nindent 4 }}
+    {{- else }}
+    input:
+      label: "no_config_in"
+      generate:
+        mapping: root = "This Benthos instance is unconfigured!"
+        interval: 1m
+    output:
+      label: "no_config_out"
+      stdout:
+        codec: lines
+    {{- end -}}
   {{- end -}}
-{{- end -}}

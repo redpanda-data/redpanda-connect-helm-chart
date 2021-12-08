@@ -33,6 +33,19 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
+          ### For debugging only - enable to allow exec into container
+          # command: ["/bin/sh","-c","sleep 300"]
+          args:
+            - "-c"
+            - "/benthos.yaml"
+            - "streams"
+            ### TODO refactor when https://github.com/Jeffail/benthos/issues/994 is resolved
+            # - /streams/*.yaml
+            {{- range .Values.streams.streamsConfigFilenames }}
+            - /streams/{{ . }}
+            {{- end }}
+          {{- end }}
           ports:
             - name: http
               containerPort: 4195
@@ -65,6 +78,16 @@ spec:
               mountPath: "/tls"
               readOnly: true
             {{- end }}
+            {{- range .Values.extraVolumeMounts }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+              readOnly: {{ .readOnly }}
+            {{- end }}
+            {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
+            - name: streams
+              mountPath: "/streams"
+              readOnly: true
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -87,4 +110,20 @@ spec:
         - name: tls
           secret:
             secretName: {{ .Values.http.tls.secretName }}
+        {{- end }}
+        {{- range .Values.extraVolumes }}
+        - name: {{ .name }}
+          {{- if .configMap }}
+          configMap:
+            name: {{ .configMap.name }}
+          {{- end }}
+          {{- if .secret }}
+          secret:
+            secretName: {{ .secret.secretName }}
+          {{- end }}
+        {{- end }}
+        {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
+        - name: streams
+          configMap:
+            name: {{ .Values.streams.streamsConfigMap }}
         {{- end }}

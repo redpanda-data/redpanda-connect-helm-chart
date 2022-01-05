@@ -37,6 +37,7 @@ data:
       {{- end -}}
     {{- if and .Values.config (ne .Values.streams.enable true) }}
     {{- tpl .Values.config . | nindent 4 }}
+    {{- else if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
     {{- else }}
     input:
       label: "no_config_in"

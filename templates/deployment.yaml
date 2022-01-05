@@ -40,11 +40,10 @@ spec:
             - "-c"
             - "/benthos.yaml"
             - "streams"
-            ### TODO refactor when https://github.com/Jeffail/benthos/issues/994 is resolved
-            # - /streams/*.yaml
-            {{- range .Values.streams.streamsConfigFilenames }}
-            - /streams/{{ . }}
+            {{- if eq .Values.streams.api.enable false }}
+            - "--no-api"
             {{- end }}
+            - /streams/*.yaml
           {{- end }}
           ports:
             - name: http

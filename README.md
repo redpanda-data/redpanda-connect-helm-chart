@@ -7,7 +7,7 @@
 This chart is a WIP, and isn't yet intended for production workloads.  Please feel free to test and provide feedback, report bugs, and/or contribute!
 
 ## Repository
----
+
 
 To add this repo:
 ```
@@ -16,7 +16,7 @@ helm repo add benthos https://difabion.github.io/benthos-helm-chart/
 Then `helm search repo benthos` for all charts.
 
 ## Configuration
----
+
 ### Common Parameters
 | Name             | Description                   | Value           |
 |------------------|-------------------------------|-----------------|

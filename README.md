@@ -1,6 +1,6 @@
-[![Chart status](https://img.shields.io/badge/Chart%20status-WIP-yellow)](https://github.com/difabion/benthos-helm-chart)
+[![Chart status](https://img.shields.io/badge/Chart%20status-WIP-yellow)](https://github.com/benthosdev/benthos-helm-chart)
 [![benthos](https://img.shields.io/badge/benthos-v3.61.0-green)](https://github.com/Jeffail/benthos/releases/tag/v3.61.0)
-[![Chart version](https://img.shields.io/badge/Chart%20version-v0.4.0-green)](https://github.com/difabion/benthos-helm-chart/releases/tag/0.4.0)
+[![Chart version](https://img.shields.io/badge/Chart%20version-v0.4.0-green)](https://github.com/benthosdev/benthos-helm-chart/releases/tag/0.4.0)
 
 # benthos-helm-chart
 
@@ -11,7 +11,7 @@ This chart is a WIP, and isn't yet intended for production workloads.  Please fe
 
 To add this repo:
 ```
-helm repo add benthos https://difabion.github.io/benthos-helm-chart/
+helm repo add benthos https://benthosdev.github.io/benthos-helm-chart/
 ```
 Then `helm search repo benthos` for all charts.
 

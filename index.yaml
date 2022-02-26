@@ -9,7 +9,7 @@ entries:
     name: benthos
     type: application
     urls:
-    - https://difabion.github.io/benthos-helm-chart/benthos-0.4.0.tgz
+    - https://benthosdev.github.io/benthos-helm-chart/benthos-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v2
     appVersion: 3.60.1
@@ -19,7 +19,7 @@ entries:
     name: benthos
     type: application
     urls:
-    - https://difabion.github.io/benthos-helm-chart/benthos-0.3.0.tgz
+    - https://benthosdev.github.io/benthos-helm-chart/benthos-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
     appVersion: 3.59.0
@@ -29,7 +29,7 @@ entries:
     name: benthos
     type: application
     urls:
-    - https://difabion.github.io/benthos-helm-chart/benthos-0.2.0.tgz
+    - https://benthosdev.github.io/benthos-helm-chart/benthos-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
     appVersion: 3.57.0
@@ -39,6 +39,6 @@ entries:
     name: benthos
     type: application
     urls:
-    - https://difabion.github.io/benthos-helm-chart/benthos-0.1.0.tgz
+    - https://benthosdev.github.io/benthos-helm-chart/benthos-0.1.0.tgz
     version: 0.1.0
 generated: "2022-01-04T23:32:55.206871-06:00"

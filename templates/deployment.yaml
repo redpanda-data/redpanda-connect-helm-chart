@@ -58,7 +58,7 @@ spec:
               {{- end }}
           readinessProbe:
             httpGet:
-              path: /ping
+              path: /ready
               port: http
               {{- if .Values.http.tls.enabled }}
               scheme: HTTPS

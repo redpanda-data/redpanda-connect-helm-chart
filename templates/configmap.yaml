@@ -35,7 +35,7 @@ data:
       cert_file: "/tls/tls.crt"
       key_file: "/tls/tls.key"
       {{- end -}}
-    {{- if and .Values.config (ne .Values.streams.enable true) }}
+    {{- if and .Values.config (ne .Values.streams.enabled true) }}
     {{- tpl .Values.config . | nindent 4 }}
     {{- else if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
     {{- else }}

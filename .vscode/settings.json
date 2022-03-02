@@ -1,5 +1,0 @@
-{
-    "yaml.schemas": {
-        "https://json.schemastore.org/github-workflow.json": "file:///Users/sloth/projects/benthos-helm-chart/.github/workflows/workflows.yaml"
-    }
-}

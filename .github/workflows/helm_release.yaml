@@ -78,4 +78,4 @@ jobs:
           git config user.email github-actions@github.com
           git add .
           git commit -m "bump chart version to ${{ needs.publish_release.outputs.chart_tag }}"
-          git push origin ${{ env.branch }}
+          git push origin ${{ env.pages_branch }}

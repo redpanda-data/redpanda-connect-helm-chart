@@ -14,4 +14,4 @@ jobs:
         uses: stackrox/kube-linter-action@v1
         with:
           directory: ${GITHUB_WORKSPACE}
-          config: .github/kube-lint/config.yaml
+          config: .github/workflows/kube-lint/config.yaml

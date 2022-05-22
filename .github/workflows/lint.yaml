@@ -1,0 +1,17 @@
+name: Lint chart
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scan yamls
+        uses: stackrox/kube-linter-action@v1
+        with:
+          directory: ${GITHUB_WORKSPACE}
+          config: .github/kube-lint/config.yaml

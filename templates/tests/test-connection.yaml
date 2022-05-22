@@ -6,6 +6,7 @@ metadata:
     {{- include "benthos.labels" . | nindent 4 }}
   annotations:
     "helm.sh/hook": test
+    "kube-linter.io/ignore-all": "Linter does not need to run on this test"
 spec:
   containers:
     - name: wget

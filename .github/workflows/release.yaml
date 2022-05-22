@@ -39,7 +39,7 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Set output tag_release_outcome
+      - name: Set output "tag_release_outcome"
         id: tag_release_output
         run: |
           echo "::set-output name=tag_release_outcome::${{ steps.tag_release.outcome }}"

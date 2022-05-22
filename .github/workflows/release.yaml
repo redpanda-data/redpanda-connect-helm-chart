@@ -1,0 +1,90 @@
+name: Release Chart
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tag_release:
+    runs-on: ubuntu-latest
+    outputs:
+      tag_release_outcome: ${{ steps.tag_release_output.outputs.tag_release_outcome }}
+      chart_tag: ${{ steps.chart_tag_output.outputs.chart_tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Get chart.yaml tag
+        run: |
+          echo "chart_tag=$(grep '^version: ' ${GITHUB_WORKSPACE}/Chart.yaml | sed 's/version: //g')" >> $GITHUB_ENV
+
+      - name: Check for tag
+        run: |
+          echo "repo_tag=$(git tag -l ${{ env.chart_tag }})" >> $GITHUB_ENV
+
+      - name: Conditionally tag release
+        id: tag_release
+        if: env.chart_tag != env.repo_tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ env.chart_tag }}
+          release_name: ${{ env.chart_tag }}
+          commitish: main
+          body: "bump to ${{ env.chart_tag }}"
+          draft: false
+          prerelease: false
+
+      - name: Set output tag_release_outcome
+        id: tag_release_output
+        run: |
+          echo "::set-output name=tag_release_outcome::${{ steps.tag_release.outcome }}"
+
+      - name: Set output "chart_tag"
+        id: chart_tag_output
+        run: |
+          echo "::set-output name=chart_tag::${{ env.chart_tag }}"
+
+  release_chart:
+    needs: tag_release
+    if: needs.tag_release.outputs.tag_release_outcome == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name blobbot-helm
+          git config user.email blobbot-helm@github.com
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.7.2
+
+      - name: Package & push; sync README
+        env:
+          pages_branch: gh-pages
+          target_branch: main
+        run: |
+          OWNER_NAME=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
+          REPO_NAME=$(cut -d '/' -f 2 <<< "$GITHUB_REPOSITORY")
+          git checkout ${{ env.target_branch }}
+          cp -v README.md ..
+          cd ${GITHUB_WORKSPACE}/..
+          helm --debug package ${REPO_NAME}
+          cd ${REPO_NAME}
+          git checkout ${{ env.pages_branch }}
+          mv -v ../README.md .
+          mv -v ../*.tgz .
+          helm --debug repo index . --url https://${OWNER_NAME}.github.io/${REPO_NAME}
+          git add .
+          git commit -m "bump chart version to ${{ needs.tag_release.outputs.chart_tag }}"
+          git push origin ${{ env.pages_branch }}

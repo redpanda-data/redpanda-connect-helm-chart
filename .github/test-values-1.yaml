@@ -1,0 +1,9 @@
+config: |
+  input:
+    generate:
+      mapping: root = "hello"
+      interval: 5s
+      count: 2
+  output:
+    stdout:
+      codec: lines

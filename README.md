@@ -15,6 +15,11 @@ helm repo add benthos https://benthosdev.github.io/benthos-helm-chart/
 ```
 Then `helm search repo benthos` for all charts.
 
+### Versions
+Benthos has recently released v4.  Use:
+- chart `<= 0.5.0` for benthos `<= 3.64.0`
+- chart `>= 0.6.0` for benthos `>= 4.1.0`
+
 ## Configuration
 
 ### Common Parameters

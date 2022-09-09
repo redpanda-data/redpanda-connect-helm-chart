@@ -34,18 +34,21 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
           ### For debugging only - enable to allow exec into container
           # command: ["/bin/sh","-c","sleep 300"]
           args:
             - "-c"
             - "/benthos.yaml"
+            {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
             - "streams"
             {{- if eq .Values.streams.api.enable false }}
             - "--no-api"
             {{- end }}
             - /streams/*.yaml
-          {{- end }}
+            {{- end }}
+            {{- if eq .Values.watch "true"}}
+            - -w
+            {{- end }}
           ports:
             - name: http
               containerPort: 4195

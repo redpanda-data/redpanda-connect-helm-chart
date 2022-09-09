@@ -39,6 +39,9 @@ spec:
           args:
             - "-c"
             - "/benthos.yaml"
+            {{- if eq .Values.watch true}}
+            - -w
+            {{- end }}
             {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
             - "streams"
             {{- if eq .Values.streams.api.enable false }}

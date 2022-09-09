@@ -46,7 +46,7 @@ spec:
             {{- end }}
             - /streams/*.yaml
             {{- end }}
-            {{- if eq .Values.watch "true"}}
+            {{- if eq .Values.watch true}}
             - -w
             {{- end }}
           ports:

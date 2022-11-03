@@ -23,6 +23,10 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+env: {} #Environment variables can be defined like below
+  #FOO: bar
+  #HELLO: world
+
 podAnnotations: {}
 
 podSecurityContext: {}

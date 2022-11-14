@@ -64,6 +64,8 @@ spec:
               {{- if .Values.http.tls.enabled }}
               scheme: HTTPS
               {{- end }}
+          env:
+            {{- toYaml .Values.env | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

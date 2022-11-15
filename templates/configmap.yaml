@@ -35,5 +35,5 @@ data:
       cert_file: "/tls/tls.crt"
       key_file: "/tls/tls.key"
       {{- end -}}
+    {{- end -}}
     {{- tpl .Values.config . | nindent 4 }}
-  {{- end -}}

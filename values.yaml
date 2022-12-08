@@ -90,6 +90,13 @@ tolerations: []
 
 affinity: {}
 
+# DeploymentStrategy: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/
+updateStrategy: {}
+#   type: RollingUpdate
+#   rollingUpdate:
+#     maxUnavailable: 1
+
+
 extraVolumes: []
   # - name: config-map
   #   configMap:

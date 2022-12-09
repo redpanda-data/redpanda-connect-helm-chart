@@ -38,7 +38,7 @@ spec:
           command:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if and .Values.args }}
+          {{- if .Values.args }}
           args:
             {{- toYaml .Values.args | nindent 12 }}
           {{- else if and .Values.streams.enabled .Values.streams.streamsConfigMap }}

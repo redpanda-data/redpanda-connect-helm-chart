@@ -90,6 +90,9 @@ tolerations: []
 
 affinity: {}
 
+# initContainers -- Init Containers to be added to the Benthos Pods.
+initContainers: []
+
 extraVolumes: []
   # - name: config-map
   #   configMap:

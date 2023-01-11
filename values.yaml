@@ -42,7 +42,7 @@ service:
   ports:
     # Override this as 443 when .Values.http.tls.enabled is true
     - name: http
-      port: 80 
+      port: 80
       targetPort: http
       protocol: TCP
     # - name: extraPort
@@ -65,6 +65,12 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+env: {}
+#  - name: KAFKA_USER
+#    valueFrom:
+#      secretKeyRef:
+#        name: s-name
+#        key: KAFKA_USER
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

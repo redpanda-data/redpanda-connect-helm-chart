@@ -20,6 +20,9 @@ spec:
       {{- end }}
       labels:
         {{- include "benthos.selectorLabels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+            {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -47,12 +50,16 @@ spec:
           args:
             - "-c"
             - "/benthos.yaml"
+            {{- if eq .Values.watch true}}
+            - -w
+            {{- end }}
+            {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
             - "streams"
             {{- if eq .Values.streams.api.enable false }}
             - "--no-api"
             {{- end }}
             - /streams/*.yaml
-          {{- end }}
+            {{- end }}
           ports:
             - name: http
               containerPort: 4195
@@ -71,6 +78,8 @@ spec:
               {{- if .Values.http.tls.enabled }}
               scheme: HTTPS
               {{- end }}
+          env:
+            {{- toYaml .Values.env | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

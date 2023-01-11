@@ -2,8 +2,18 @@ apiVersion: v1
 entries:
   benthos:
   - apiVersion: v2
+    appVersion: 4.11.0
+    created: "2023-01-11T08:19:11.793559133Z"
+    description: Benthos Helm chart for Kubernetes
+    digest: 50ab9c8fbc38d87d55dcf0e26edfc188f22e6eacbaeac8eff7a8274d478a7508
+    name: benthos
+    type: application
+    urls:
+    - https://benthosdev.github.io/benthos-helm-chart/benthos-0.7.0.tgz
+    version: 0.7.0
+  - apiVersion: v2
     appVersion: 4.1.0
-    created: "2022-05-23T06:15:04.687938806Z"
+    created: "2023-01-11T08:19:11.792710968Z"
     description: Benthos Helm chart for Kubernetes
     digest: 8407829383a02ebf1d7f1a44fb18cbbd9e2632f672befe5e4f6fb0e01cf5d270
     name: benthos
@@ -13,7 +23,7 @@ entries:
     version: 0.6.0
   - apiVersion: v2
     appVersion: 3.64.0
-    created: "2022-05-23T06:15:04.687039299Z"
+    created: "2023-01-11T08:19:11.792071794Z"
     description: Benthos Helm chart for Kubernetes
     digest: 37c40c82472f68f824bbd26a4424a16b9155bb6e079e666f0c7d07aa9d1675ca
     name: benthos
@@ -23,7 +33,7 @@ entries:
     version: 0.5.0
   - apiVersion: v2
     appVersion: 3.64.0
-    created: "2022-05-23T06:15:04.686218092Z"
+    created: "2023-01-11T08:19:11.79144182Z"
     description: Benthos Helm chart for Kubernetes
     digest: e414628295aba642d19f000e880273d55be16e2714f39910e3d19a8e766f420f
     name: benthos
@@ -33,7 +43,7 @@ entries:
     version: 0.4.2
   - apiVersion: v2
     appVersion: 3.64.0
-    created: "2022-05-23T06:15:04.685254685Z"
+    created: "2023-01-11T08:19:11.790667452Z"
     description: Benthos Helm chart for Kubernetes
     digest: 7c376fb11b360037eae7b64912f63297439d2ffc69961edc53ed8e8df79b17d6
     name: benthos
@@ -43,7 +53,7 @@ entries:
     version: 0.4.1
   - apiVersion: v2
     appVersion: 3.61.0
-    created: "2022-05-23T06:15:04.684338277Z"
+    created: "2023-01-11T08:19:11.789911783Z"
     description: Benthos Helm chart for Kubernetes
     digest: 57ec9bd23f12247777ada790baaf6309390dd47c4c44763d8cc67f81a424fe43
     name: benthos
@@ -53,7 +63,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: 3.60.1
-    created: "2022-05-23T06:15:04.68344787Z"
+    created: "2023-01-11T08:19:11.789229611Z"
     description: Benthos Helm chart for Kubernetes
     digest: 5003479e62b861b314989fe445ff1b9b5d35295d8f6dc8c32f23ed2c5371c301
     name: benthos
@@ -63,7 +73,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 3.59.0
-    created: "2022-05-23T06:15:04.682518262Z"
+    created: "2023-01-11T08:19:11.78851814Z"
     description: Benthos Helm chart for Kubernetes
     digest: 41b48596923a3e404e0bbafa1762f5ec7147951ef7d0651766e93cd761e37db0
     name: benthos
@@ -73,7 +83,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 3.57.0
-    created: "2022-05-23T06:15:04.681784056Z"
+    created: "2023-01-11T08:19:11.787654976Z"
     description: Benthos Helm chart for Kubernetes
     digest: 40636020d9742c0a1f535bbe93f926d8ae0f7e085d9b674213fe055acb8a19a0
     name: benthos
@@ -81,4 +91,4 @@ entries:
     urls:
     - https://benthosdev.github.io/benthos-helm-chart/benthos-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-23T06:15:04.680632047Z"
+generated: "2023-01-11T08:19:11.786023743Z"

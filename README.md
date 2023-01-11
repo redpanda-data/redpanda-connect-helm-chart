@@ -1,13 +1,12 @@
 [![Chart status](https://img.shields.io/badge/Chart%20status-WIP-yellow)](https://github.com/benthosdev/benthos-helm-chart)
-[![benthos](https://img.shields.io/badge/benthos-v4.1.0-green)](https://github.com/Jeffail/benthos/releases/tag/v4.1.0)
-[![Chart version](https://img.shields.io/badge/Chart%20version-v0.6.0-green)](https://github.com/benthosdev/benthos-helm-chart/releases/tag/0.6.0)
+[![benthos](https://img.shields.io/badge/benthos-v4.11.0-green)](https://github.com/Jeffail/benthos/releases/tag/v4.11.0)
+[![Chart version](https://img.shields.io/badge/Chart%20version-v0.7.0-green)](https://github.com/benthosdev/benthos-helm-chart/releases/tag/0.7.0)
 
 # benthos-helm-chart
 
-This chart is a WIP, and isn't yet intended for production workloads.  Please feel free to test and provide feedback, report bugs, and/or contribute!
+This chart is relatively immature, and may not yet support all workloads or benthos features.  Please feel free to test and provide feedback, report bugs, and/or contribute!
 
 ## Repository
-
 
 To add this repo:
 ```
@@ -15,38 +14,62 @@ helm repo add benthos https://benthosdev.github.io/benthos-helm-chart/
 ```
 Then `helm search repo benthos` for all charts.
 
-## Configuration
+### Versions
+Benthos is currently on v4.  If you need v3 for any reason, please set `image.tag` in your values.yaml.
 
-### Common Parameters
-| Name             | Description                   | Value           |
-|------------------|-------------------------------|-----------------|
-| image.repository | Docker image repository       | jeffail/benthos |
-| image.pullPolicy | Docker image pull policy      | IfNotPresent    |
-| image.tag        | Docker image tag override     | ""              |
-| imagePullSecrets | Docker registry secrets array | []              |
-| service.type     | Kubernetes service type       | ClusterIP       |
-| service.ports    | Kubernetes service ports      | []              |
+## Configuration
 
 ### Benthos Parameters
 
 For more information on configuring the HTTP component, refer to the [Benthos HTTP component documentation](https://www.benthos.dev/docs/components/http/about).
-| Name                     | Description                                        | Value        |
-|--------------------------|----------------------------------------------------|--------------|
-| http.enabled             | Enables the HTTP server component                  | true         |
-| http.address             | HTTP server component binding address              | 0.0.0.0:4195 |
-| http.readTimeout         | HTTP server component read timeout                 | 5s           |
-| http.rootPath            | General Benthos HTTP endpoint prefix               | /benthos     |
-| http.debugEndpoints      | Enables debugging endpoints                        | false        |
-| http.cors.enabled        | Enables Cross-Origin Resource Sharing              | false        |
-| http.cors.allowedOrigins | Allowed source domains for CORS                    | ""           |
-| http.tls.enabled         | Enables TLS for all Benthos endpoints              | false        |
-| http.tls.secretName      | `kubernetes.io/tls` secret name                    | ""           |
-| extraVolumes             | Additional volumes for configMaps and secrets      | []           |
-| extraVolumeMounts        | Additional volumeMounts for configMaps and secrets | []           |
-| streams.enabled          | Enables 'Benthos streams' mode                     | false        |
-| streams.streamsConfigMap | Name of K8s configMap containing streams configs   | ""           |
-| streams.api.enable       | Enables streams API                                | true         |
-| config                   | Benthos component configuration                    | ""           |
+| Name                                          | Description                                      | Value              |
+|-----------------------------------------------|--------------------------------------------------|--------------------|
+| image.repository                              | Docker image repository                          | benthosdev/benthos |
+| image.pullPolicy                              | Docker image pull policy                         | IfNotPresent       |
+| image.tag                                     | Docker image tag override                        | ""                 |
+| imagePullSecrets                              | Docker registry secrets array                    | []                 |
+| nameOverride                                  | Sets name override                               | ""                 |
+| fullnameOverride                              | Sets full name override                          | ""                 |
+| serviceaccount.create                         | Enables creation of serviceaccount               | false              |
+| serviceaccount.annotations                    | Sets serviceaccount annotations                  | {}                 |
+| serviceaccount.name                           | Sets serviceaccount name                         | ""                 |
+| podAnnotations                                | Sets pod annotations                             | {}                 |
+| podLabels                                     | Sets pod labels                                  | {}                 |
+| podSecurityContext                            | Sets pod security context                        | {}                 |
+| securityContext                               | Sets security context                            | {}                 |
+| service.type                                  | Kubernetes service type                          | ClusterIP          |
+| service.ports                                 | Kubernetes service ports                         | []                 |
+| ingress.enabled                               | Enables ingress                                  | false              |
+| ingress.className                             | Sets ingress class name                          | ""                 |
+| ingress.annotations                           | Sets ingress annotations                         | {}                 |
+| ingress.tls                                   | Sets ingress TLS configuration                   | []                 |
+| ingress.hosts                                 | Sets ingress hosts configuration                 | []                 |
+| env                                           | Sets benthos environment variables               | ""                 |
+| resources                                     | Set pod resource limits and/or requests          | {}                 |
+| autoscaling.enabled                           | Enables the horizontal pod autoscaler            | false              |
+| autoscaling.minReplicas                       | Sets min number of replicas                      | 1                  |
+| autoscaling.maxReplicas                       | Sets max numbers of replicas                     | 100                |
+| autoscaling.targetCPUUtilizationPercentage    | Sets desired CPU autoscaling threshold           | 80                 |
+| autoscaling.targetMemoryUtilizationPercentage | Sets desired memory autoscaling threshold        | 80                 |
+| nodeSelector                                  | Sets node selector configuration                 | {}                 |
+| tolerations                                   | Sets tolerations configuration                   | []                 |
+| affinity                                      | Sets affinity configuration                      | {}                 |
+| extraVolumes                                  | Defines extra volumes configuration              | []                 |
+| extraVolumeMounts                             | Sets additional mounts defined in extraVolumes   | []                 |
+| streams.enabled                               | Enables 'Benthos streams' mode                   | false              |
+| streams.streamsConfigMap                      | Name of K8s configMap containing streams configs | ""                 |
+| streams.api.enable                            | Enables streams API                              | true               |
+| http.enabled                                  | Enables the HTTP server component                | true               |
+| http.address                                  | HTTP server component binding address            | 0.0.0.0:4195       |
+| http.readTimeout                              | HTTP server component read timeout               | 5s                 |
+| http.rootPath                                 | General Benthos HTTP endpoint prefix             | /benthos           |
+| http.debugEndpoints                           | Enables debugging endpoints                      | false              |
+| http.cors.enabled                             | Enables Cross-Origin Resource Sharing            | false              |
+| http.cors.allowedOrigins                      | Allowed source domains for CORS                  | ""                 |
+| http.tls.enabled                              | Enables TLS for all Benthos endpoints            | false              |
+| http.tls.secretName                           | `kubernetes.io/tls` secret name                  | ""                 |
+| watch                                         | Enables watch mode                               | false              |
+| config                                        | Benthos component configuration                  | ""                 |
 
 ## Config
 

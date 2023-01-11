@@ -130,7 +130,6 @@ http:
     enabled: false
     # Create a secret of type `kubernetes.io/tls` in the same namespace and add the name here
     # secretName: ""
-
+watch: false
 # /benthos.yaml configuration
 config: |
-

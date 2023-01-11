@@ -1,6 +1,6 @@
 [![Chart status](https://img.shields.io/badge/Chart%20status-WIP-yellow)](https://github.com/benthosdev/benthos-helm-chart)
 [![benthos](https://img.shields.io/badge/benthos-v4.11.0-green)](https://github.com/Jeffail/benthos/releases/tag/v4.11.0)
-[![Chart version](https://img.shields.io/badge/Chart%20version-v0.7.0-green)](https://github.com/benthosdev/benthos-helm-chart/releases/tag/0.7.0)
+[![Chart version](https://img.shields.io/badge/Chart%20version-v0.7.1-green)](https://github.com/benthosdev/benthos-helm-chart/releases/tag/0.7.1)
 
 # benthos-helm-chart
 
@@ -103,7 +103,7 @@ When TLS is enabled, the Kubernetes readiness and liveness probes will operate o
 
 ## Streams mode
 
-When running Benthos in [streams mode](https://www.benthos.dev/docs/guides/streams_mode/about), all configuration files should be placed in a single Kubernetes configMap, like so:
+When running Benthos in [streams mode](https://www.benthos.dev/docs/guides/streams_mode/about), all individual stream configuration files should be combined and placed in a single Kubernetes configMap, like so:
 
 ```yaml
 apiVersion: v1
@@ -114,7 +114,7 @@ data:
   hello.yaml: |
     input:
       generate:
-        mapping: root = "hello"
+        mapping: root = "woof"
         interval: 5s
         count: 0
     output:
@@ -123,18 +123,18 @@ data:
   aaaaa.yaml: |
     input:
       generate:
-        mapping: root = "AAAAAAAAAA"
+        mapping: root = "meow"
         interval: 2s
         count: 0
     output:
       stdout:
         codec: lines
 ```
-Note: This exposes a [streams API](https://www.benthos.dev/docs/guides/streams_mode/streams_api) where configuration can be viewed and altered.
+Setting `streams.enabled: true` in `values.yaml` adds `streams /streams/*.yaml` to the pod command arguments.  
 
-As of benthos version `3.61.0`, the streams API can be disabled to prevent changes to the configuration[s] of a running [Benthos in streams mode via config files](https://www.benthos.dev/docs/guides/streams_mode/using_config_files); use `.Values.streams.api.enabled = false` to toggle the API off.
+This exposes a [streams API](https://www.benthos.dev/docs/guides/streams_mode/streams_api) by default, where configuration can be viewed and altered by anyone with access to the configured benthos endpoint.  As of benthos version `3.61.0`, the streams API can be disabled to prevent changes to the configuration[s] of a running [Benthos in streams mode via config files](https://www.benthos.dev/docs/guides/streams_mode/using_config_files); use `.Values.streams.api.enabled = false` to toggle the API off (this adds an additional argument to the pod command to become `streams --no-api /streams/*.yaml`).
 
-For this chart, the stream fields configurations should go in the configMap while the shared fields go in the `config` block (with the exception of HTTP server configs, which are covered by the `http` block).
+With streams mode enabled, `/benthos.yaml` should only contain the configuration for `http` as defined either by the `http` values block or the defaults; the contents of the streams configMap (as defined and pulled into the deployment by the name set in `streams.streamsConfigMap`) are deployed to `/streams/*.yaml`. Additionally, general config like `metrics`, `logger `, and `tracing`.
 
 From the `benthos streams --help` context:
 
@@ -143,3 +143,5 @@ In streams mode the stream fields of a root target config (input, buffer,
       pipeline, output) will be ignored. Other fields will be shared across all
       loaded streams (resources, metrics, etc).
 ```
+
+Currently this streams configMap should be applied **separately from and before installation of** the helm chart; support for deploying additional configMaps within the chart may be implemented later.

@@ -56,6 +56,7 @@ spec:
             - name: http
               containerPort: 4195
               protocol: TCP
+          {{- if .Values.http.enabled -}}
           livenessProbe:
             httpGet:
               path: /ping
@@ -70,6 +71,7 @@ spec:
               {{- if .Values.http.tls.enabled }}
               scheme: HTTPS
               {{- end }}
+          {{- end }}
           env:
             {{- toYaml .Values.env | nindent 12 }}
           resources:

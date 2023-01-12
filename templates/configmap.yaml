@@ -11,7 +11,6 @@ data:
       enabled: {{ .Values.http.enabled }}
       {{- if .Values.http.enabled }}
       address: {{ .Values.http.address | default "0.0.0.0:4195" }}
-      read_timeout: {{ .Values.http.readTimeout | default "5s" }}
       root_path: {{ .Values.http.rootPath | default "/benthos" }}
       debug_endpoints: {{ .Values.http.debugEndpoints | default false }}
       {{- end -}}

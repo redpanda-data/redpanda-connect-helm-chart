@@ -51,6 +51,7 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | streams.enabled          | Enables 'Benthos streams' mode                     | false        |
 | streams.streamsConfigMap | Name of K8s configMap containing streams configs   | ""           |
 | streams.api.enable       | Enables streams API                                | true         |
+| commonLabels             | Add labels that are common for all k8s components  | ""           |
 | config                   | Benthos component configuration                    | ""           |
 
 ## Config

@@ -136,7 +136,6 @@ http:
   ### These are the current defaults for the following HTTP component parameters;
   ### uncomment and edit any that require adjustment
   # address: 0.0.0.0:4195
-  # readTimeout: 5s
   # rootPath: /benthos
   # debugEndpoints: false
   cors:
@@ -148,6 +147,7 @@ http:
     # Create a secret of type `kubernetes.io/tls` in the same namespace and add the name here
     # secretName: ""
 
+# EXPERIMENTAL: watch config files for changes and automatically apply them
 watch: false
 
 # /benthos.yaml configuration

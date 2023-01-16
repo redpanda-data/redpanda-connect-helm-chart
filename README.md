@@ -67,6 +67,9 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | http.cors.allowedOrigins                      | Allowed source domains for CORS                  | ""                 |
 | http.tls.enabled                              | Enables TLS for all Benthos endpoints            | false              |
 | http.tls.secretName                           | `kubernetes.io/tls` secret name                  | ""                 |
+| podDisruptionBudget.enabled                   | Enables Pod Disruption Budget for Benthos        | false              |
+| podDisruptionBudget.minAvailable              | Min number of pods available at all times        | ""                 |
+| podDisruptionBudget.maxUnavailable            | Max unavailable number of pods                   | ""                 |
 | watch                                         | Enables watch mode                               | false              |
 | config                                        | Benthos component configuration                  | ""                 |
 

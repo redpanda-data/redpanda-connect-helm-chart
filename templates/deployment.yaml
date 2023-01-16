@@ -60,6 +60,7 @@ spec:
             {{- end }}
             - /streams/*.yaml
             {{- end }}
+          {{- end }}  
           ports:
             - name: http
               containerPort: 4195

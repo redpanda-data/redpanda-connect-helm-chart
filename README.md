@@ -36,7 +36,7 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | podAnnotations                                | Sets pod annotations                             | {}                 |
 | podLabels                                     | Sets pod labels                                  | {}                 |
 | podSecurityContext                            | Sets pod security context                        | {}                 |
-| command                                       | Replaces entrypoint command of bemthos docker     | ""                 |
+| command                                       | Replaces entrypoint command of benthos docker     | ""                 |
 | args                                          | Override default arguments passed with `command` | ""                 |
 | securityContext                               | Sets security context                            | {}                 |
 | service.type                                  | Kubernetes service type                          | ClusterIP          |

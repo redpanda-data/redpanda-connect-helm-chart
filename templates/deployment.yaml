@@ -44,7 +44,7 @@ spec:
           {{- if .Values.args }}
           args:
             {{- toYaml .Values.args | nindent 12 }}
-          {{- else if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
+          {{- else }}
           ### For debugging only - enable to allow exec into container
           # command: ["/bin/sh","-c","sleep 300"]
           args:

@@ -68,7 +68,7 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | http.tls.enabled                              | Enables TLS for all Benthos endpoints            | false              |
 | http.tls.secretName                           | `kubernetes.io/tls` secret name                  | ""                 |
 | watch                                         | Enables watch mode                               | false              |
-| initContainers                                | Add any custom inti container                    | []                 |
+| initContainers                                | Add any custom init container                    | []                 |
 | config                                        | Benthos component configuration                  | ""                 |
 
 ## Config

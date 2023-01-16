@@ -54,7 +54,11 @@ spec:
             {{- end }}
           ports:
             - name: http
+              {{- if .Values.http.address}}
+              containerPort: {{ (split ":" .Values.http.address)._1 }}
+              {{- else }}
               containerPort: 4195
+              {{- end }}
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -75,12 +79,10 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            {{- if .Values.config }}
             - name: config
               mountPath: "/benthos.yaml"
               subPath: "benthos.yaml"
               readOnly: true
-            {{- end }}
             {{- if and .Values.http.tls.enabled .Values.http.tls.secretName }}
             - name: tls
               mountPath: "/tls"
@@ -109,11 +111,9 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        {{- if .Values.config }}
         - name: config
           configMap:
             name: {{ template "benthos.fullname" . }}-config
-        {{- end }}
         {{- if and .Values.http.tls.enabled .Values.http.tls.secretName }}
         - name: tls
           secret:

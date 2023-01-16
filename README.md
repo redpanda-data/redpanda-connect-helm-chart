@@ -1,6 +1,6 @@
 [![Chart status](https://img.shields.io/badge/Chart%20status-WIP-yellow)](https://github.com/benthosdev/benthos-helm-chart)
 [![benthos](https://img.shields.io/badge/benthos-v4.11.0-green)](https://github.com/Jeffail/benthos/releases/tag/v4.11.0)
-[![Chart version](https://img.shields.io/badge/Chart%20version-v0.7.1-green)](https://github.com/benthosdev/benthos-helm-chart/releases/tag/0.7.1)
+[![Chart version](https://img.shields.io/badge/Chart%20version-v0.7.2-green)](https://github.com/benthosdev/benthos-helm-chart/releases/tag/0.7.2)
 
 # benthos-helm-chart
 
@@ -63,7 +63,6 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | streams.api.enable                            | Enables streams API                              | true               |
 | http.enabled                                  | Enables the HTTP server component                | true               |
 | http.address                                  | HTTP server component binding address            | 0.0.0.0:4195       |
-| http.readTimeout                              | HTTP server component read timeout               | 5s                 |
 | http.rootPath                                 | General Benthos HTTP endpoint prefix             | /benthos           |
 | http.debugEndpoints                           | Enables debugging endpoints                      | false              |
 | http.cors.enabled                             | Enables Cross-Origin Resource Sharing            | false              |

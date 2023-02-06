@@ -27,4 +27,17 @@ data:
           {{- end }}
         {{- end }}
       {{- end -}}
+    {{- if and .Values.config (ne .Values.streams.enabled true) }}
     {{- tpl .Values.config . | nindent 4 }}
+    {{- else if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
+    {{- else }}
+    input:
+      label: "no_config_in"
+      generate:
+        mapping: root = "This Benthos instance is unconfigured!"
+        interval: 1m
+    output:
+      label: "no_config_out"
+      stdout:
+        codec: lines
+    {{- end -}}

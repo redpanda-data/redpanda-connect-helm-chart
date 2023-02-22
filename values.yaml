@@ -98,12 +98,14 @@ tolerations: []
 
 affinity: {}
 
+# initContainers -- Init Containers to be added to the Benthos Pods.
+initContainers: []
+
 # DeploymentStrategy: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/
 updateStrategy: {}
 #   type: RollingUpdate
 #   rollingUpdate:
 #     maxUnavailable: 1
-
 
 extraVolumes: []
   # - name: config-map

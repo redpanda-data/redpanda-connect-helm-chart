@@ -138,16 +138,8 @@ spec:
           secret:
             secretName: {{ .Values.http.tls.secretName }}
         {{- end }}
-        {{- range .Values.extraVolumes }}
-        - name: {{ .name }}
-          {{- if .configMap }}
-          configMap:
-            name: {{ .configMap.name }}
-          {{- end }}
-          {{- if .secret }}
-          secret:
-            secretName: {{ .secret.secretName }}
-          {{- end }}
+        {{- if .Values.extraVolumes }}
+          {{- toYaml .Values.extraVolumes | nindent 8 }}
         {{- end }}
         {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
         - name: streams

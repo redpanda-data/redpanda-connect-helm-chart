@@ -35,6 +35,7 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | serviceaccount.name                           | Sets serviceaccount name                         | ""                 |
 | podAnnotations                                | Sets pod annotations                             | {}                 |
 | podLabels                                     | Sets pod labels                                  | {}                 |
+| commonLabels                                  | Add labels that are common for all k8s components| ""                 |
 | podSecurityContext                            | Sets pod security context                        | {}                 |
 | command                                       | Replaces entrypoint command of benthos docker     | ""                 |
 | args                                          | Override default arguments passed with `command` | ""                 |

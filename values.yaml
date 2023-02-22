@@ -4,6 +4,9 @@
 
 replicaCount: 1
 
+# commonLabels -- Add additional labels to all created resources.
+commonLabels: {}
+
 image:
   repository: "jeffail/benthos"
   pullPolicy: IfNotPresent

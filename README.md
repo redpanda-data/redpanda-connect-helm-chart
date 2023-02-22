@@ -45,6 +45,7 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | ingress.tls                                   | Sets ingress TLS configuration                   | []                 |
 | ingress.hosts                                 | Sets ingress hosts configuration                 | []                 |
 | env                                           | Sets benthos environment variables               | []                 |
+| updateStrategy                                | Add Deployment Strategy                          | {}                 |
 | resources                                     | Set pod resource limits and/or requests          | {}                 |
 | autoscaling.enabled                           | Enables the horizontal pod autoscaler            | false              |
 | autoscaling.minReplicas                       | Sets min number of replicas                      | 1                  |

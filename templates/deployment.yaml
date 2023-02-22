@@ -45,6 +45,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- with .Values.command }}
+          command:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.args }}
+          args:
+            {{- toYaml .Values.args | nindent 12 }}
+          {{- else }}
           ### For debugging only - enable to allow exec into container
           # command: ["/bin/sh","-c","sleep 300"]
           args:
@@ -60,6 +68,7 @@ spec:
             {{- end }}
             - /streams/*.yaml
             {{- end }}
+          {{- end }}  
           ports:
             - name: http
               {{- if .Values.http.address}}

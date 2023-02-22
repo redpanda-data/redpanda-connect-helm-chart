@@ -147,6 +147,12 @@ http:
     # Create a secret of type `kubernetes.io/tls` in the same namespace and add the name here
     # secretName: ""
 
+# command -- Command replaces the entrypoint command of the docker
+command: []
+
+# args -- Override Benthos's default arguments passed with command.
+args: []
+
 # EXPERIMENTAL: watch config files for changes and automatically apply them
 watch: false
 

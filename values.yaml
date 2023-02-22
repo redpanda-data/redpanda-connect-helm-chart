@@ -4,6 +4,9 @@
 
 replicaCount: 1
 
+# commonLabels -- Add additional labels to all created resources.
+commonLabels: {}
+
 image:
   repository: "jeffail/benthos"
   pullPolicy: IfNotPresent
@@ -106,6 +109,14 @@ podDisruptionBudget:
   # podDisruptionBudget.maxUnavailable -- (int) The number of Pods that can be unavailable after an eviction.
   maxUnavailable: 1
 
+# initContainers -- Init Containers to be added to the Benthos Pods.
+initContainers: []
+
+# DeploymentStrategy: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/
+updateStrategy: {}
+#   type: RollingUpdate
+#   rollingUpdate:
+#     maxUnavailable: 1
 
 extraVolumes: []
   # - name: config-map
@@ -146,6 +157,12 @@ http:
     enabled: false
     # Create a secret of type `kubernetes.io/tls` in the same namespace and add the name here
     # secretName: ""
+
+# command -- Command replaces the entrypoint command of the docker
+command: []
+
+# args -- Override Benthos's default arguments passed with command.
+args: []
 
 # EXPERIMENTAL: watch config files for changes and automatically apply them
 watch: false

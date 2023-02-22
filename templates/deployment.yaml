@@ -11,6 +11,10 @@ spec:
   selector:
     matchLabels:
       {{- include "benthos.selectorLabels" . | nindent 6 }}
+  {{- with .Values.updateStrategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   template:
     metadata:
       annotations:
@@ -31,12 +35,24 @@ spec:
       serviceAccountName: {{ include "benthos.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- with .Values.initContainers }}
+      initContainers:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- with .Values.command }}
+          command:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.args }}
+          args:
+            {{- toYaml .Values.args | nindent 12 }}
+          {{- else }}
           ### For debugging only - enable to allow exec into container
           # command: ["/bin/sh","-c","sleep 300"]
           args:
@@ -52,10 +68,16 @@ spec:
             {{- end }}
             - /streams/*.yaml
             {{- end }}
+          {{- end }}  
           ports:
             - name: http
+              {{- if .Values.http.address}}
+              containerPort: {{ (split ":" .Values.http.address)._1 }}
+              {{- else }}
               containerPort: 4195
+              {{- end }}
               protocol: TCP
+          {{- if .Values.http.enabled }}
           livenessProbe:
             httpGet:
               path: /ping
@@ -70,17 +92,16 @@ spec:
               {{- if .Values.http.tls.enabled }}
               scheme: HTTPS
               {{- end }}
+          {{- end }}
           env:
             {{- toYaml .Values.env | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            {{- if .Values.config }}
             - name: config
               mountPath: "/benthos.yaml"
               subPath: "benthos.yaml"
               readOnly: true
-            {{- end }}
             {{- if and .Values.http.tls.enabled .Values.http.tls.secretName }}
             - name: tls
               mountPath: "/tls"
@@ -109,26 +130,16 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        {{- if .Values.config }}
         - name: config
           configMap:
             name: {{ template "benthos.fullname" . }}-config
-        {{- end }}
         {{- if and .Values.http.tls.enabled .Values.http.tls.secretName }}
         - name: tls
           secret:
             secretName: {{ .Values.http.tls.secretName }}
         {{- end }}
-        {{- range .Values.extraVolumes }}
-        - name: {{ .name }}
-          {{- if .configMap }}
-          configMap:
-            name: {{ .configMap.name }}
-          {{- end }}
-          {{- if .secret }}
-          secret:
-            secretName: {{ .secret.secretName }}
-          {{- end }}
+        {{- if .Values.extraVolumes }}
+          {{- toYaml .Values.extraVolumes | nindent 8 }}
         {{- end }}
         {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
         - name: streams

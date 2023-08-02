@@ -35,7 +35,10 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | serviceaccount.name                           | Sets serviceaccount name                         | ""                 |
 | podAnnotations                                | Sets pod annotations                             | {}                 |
 | podLabels                                     | Sets pod labels                                  | {}                 |
+| commonLabels                                  | Add labels that are common for all k8s components| ""                 |
 | podSecurityContext                            | Sets pod security context                        | {}                 |
+| command                                       | Replaces entrypoint command of benthos docker     | ""                 |
+| args                                          | Override default arguments passed with `command` | ""                 |
 | securityContext                               | Sets security context                            | {}                 |
 | service.type                                  | Kubernetes service type                          | ClusterIP          |
 | service.ports                                 | Kubernetes service ports                         | []                 |
@@ -45,6 +48,7 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | ingress.tls                                   | Sets ingress TLS configuration                   | []                 |
 | ingress.hosts                                 | Sets ingress hosts configuration                 | []                 |
 | env                                           | Sets benthos environment variables               | []                 |
+| updateStrategy                                | Add Deployment Strategy                          | {}                 |
 | resources                                     | Set pod resource limits and/or requests          | {}                 |
 | autoscaling.enabled                           | Enables the horizontal pod autoscaler            | false              |
 | autoscaling.minReplicas                       | Sets min number of replicas                      | 1                  |
@@ -67,7 +71,11 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | http.cors.allowedOrigins                      | Allowed source domains for CORS                  | ""                 |
 | http.tls.enabled                              | Enables TLS for all Benthos endpoints            | false              |
 | http.tls.secretName                           | `kubernetes.io/tls` secret name                  | ""                 |
+| podDisruptionBudget.enabled                   | Enables Pod Disruption Budget for Benthos        | false              |
+| podDisruptionBudget.minAvailable              | Min number of pods available at all times        | ""                 |
+| podDisruptionBudget.maxUnavailable            | Max unavailable number of pods                   | ""                 |
 | watch                                         | Enables watch mode                               | false              |
+| initContainers                                | Add any custom init container                    | []                 |
 | config                                        | Benthos component configuration                  | ""                 |
 
 ## Config

@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.8.0] - 2023-08-02
+
+- Merged:
+  - PDB template (#43)
+  - extraVolumes (#41)
+  - conditional health probes (#40)
+  - commonLabels (#38)
+  - entrypoint override (#36)
+  - initContainers (#35)
+  - updateStrategy (#32)
+
 ## [0.7.2] - 2023-01-16
 
 - Removed `http.read_timeout` from configuration options

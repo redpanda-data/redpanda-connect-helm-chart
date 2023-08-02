@@ -1,6 +1,6 @@
 [![Chart status](https://img.shields.io/badge/Chart%20status-WIP-yellow)](https://github.com/benthosdev/benthos-helm-chart)
 [![benthos](https://img.shields.io/badge/benthos-v4.11.0-green)](https://github.com/Jeffail/benthos/releases/tag/v4.11.0)
-[![Chart version](https://img.shields.io/badge/Chart%20version-v0.7.2-green)](https://github.com/benthosdev/benthos-helm-chart/releases/tag/0.7.2)
+[![Chart version](https://img.shields.io/badge/Chart%20version-v0.8.0-green)](https://github.com/benthosdev/benthos-helm-chart/releases/tag/0.8.0)
 
 # benthos-helm-chart
 

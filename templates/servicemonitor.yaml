@@ -1,0 +1,19 @@
+{{- if and .Values.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "benthos.fullname" . }}
+  labels:
+    {{- include "benthos.labels" . | nindent 4 }}
+spec:
+  endpoints:
+    - interval: {{ .Values.serviceMonitor.interval}}
+      targetPort: http
+      path: /metrics
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "benthos.selectorLabels" . | nindent 6 }}
+{{- end }}

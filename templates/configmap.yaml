@@ -7,6 +7,14 @@ metadata:
     {{- include "benthos.labels" . | nindent 4 }}
 data:
   benthos.yaml: |
+    {{- with .Values.metrics }}
+    metrics:
+      {{- toYaml . | nindent 6}} 
+    {{- end }}
+    {{- with .Values.tracing }}
+    tracers:
+      {{- toYaml . | nindent 6}}
+    {{- end }}
     http:
       enabled: {{ .Values.http.enabled }}
       {{- if .Values.http.enabled }}

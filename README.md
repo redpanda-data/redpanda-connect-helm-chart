@@ -33,11 +33,12 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | serviceaccount.create                         | Enables creation of serviceaccount               | false              |
 | serviceaccount.annotations                    | Sets serviceaccount annotations                  | {}                 |
 | serviceaccount.name                           | Sets serviceaccount name                         | ""                 |
+| terminationGracePeriodSeconds                 | Override Benthos terminationGracePeriodSeconds.  | 60                 |
 | podAnnotations                                | Sets pod annotations                             | {}                 |
 | podLabels                                     | Sets pod labels                                  | {}                 |
 | commonLabels                                  | Add labels that are common for all k8s components| ""                 |
 | podSecurityContext                            | Sets pod security context                        | {}                 |
-| command                                       | Replaces entrypoint command of benthos docker     | ""                 |
+| command                                       | Replaces entrypoint command of benthos docker    | ""                 |
 | args                                          | Override default arguments passed with `command` | ""                 |
 | securityContext                               | Sets security context                            | {}                 |
 | service.type                                  | Kubernetes service type                          | ClusterIP          |

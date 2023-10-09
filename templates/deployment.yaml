@@ -35,6 +35,7 @@ spec:
       serviceAccountName: {{ include "benthos.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      terminationGracePeriodSeconds: {{ default 60 .Values.terminationGracePeriodSeconds }}
       {{- with .Values.initContainers }}
       initContainers:
         {{- toYaml . | nindent 8 }}

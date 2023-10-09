@@ -32,6 +32,9 @@ podLabels: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
+# workloadResourceAnnotations -- Set annotations on the Benthos Deployment
+workloadResourceAnnotations: {}
+
 securityContext: {}
   # capabilities:
   #   drop:d

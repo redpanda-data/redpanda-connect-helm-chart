@@ -4,6 +4,8 @@ metadata:
   name: {{ include "benthos.fullname" . }}
   labels:
     {{- include "benthos.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.workloadResourceAnnotations | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}

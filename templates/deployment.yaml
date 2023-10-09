@@ -95,6 +95,12 @@ spec:
           {{- end }}
           env:
             {{- toYaml .Values.env | nindent 12 }}
+          {{- if .Values.envFrom }}
+          {{- with .Values.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

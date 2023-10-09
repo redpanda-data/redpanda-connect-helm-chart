@@ -75,6 +75,7 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | podDisruptionBudget.minAvailable              | Min number of pods available at all times        | ""                 |
 | podDisruptionBudget.maxUnavailable            | Max unavailable number of pods                   | ""                 |
 | watch                                         | Enables watch mode                               | false              |
+| topologySpreadConstraints                     | Configure topology spread constraints            | []                 |
 | initContainers                                | Add any custom init container                    | []                 |
 | config                                        | Benthos component configuration                  | ""                 |
 

@@ -33,7 +33,7 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | serviceaccount.create                         | Enables creation of serviceaccount               | false              |
 | serviceaccount.annotations                    | Sets serviceaccount annotations                  | {}                 |
 | serviceaccount.name                           | Sets serviceaccount name                         | ""                 |
-| terminationGracePeriodSeconds                 | Override Benthos terminationGracePeriodSeconds.  | 60                 |
+| deployment.terminationGracePeriodSeconds      | Override Benthos terminationGracePeriodSeconds.  | 60                 |
 | podAnnotations                                | Sets pod annotations                             | {}                 |
 | podLabels                                     | Sets pod labels                                  | {}                 |
 | commonLabels                                  | Add labels that are common for all k8s components| ""                 |

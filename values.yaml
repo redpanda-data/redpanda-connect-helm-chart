@@ -101,8 +101,9 @@ tolerations: []
 
 affinity: {}
 
-# Default 60. ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
-terminationGracePeriodSeconds: 60
+deployment:
+  # Default 60. ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
+  terminationGracePeriodSeconds: 60
 
 podDisruptionBudget:
   # podDisruptionBudget.enabled -- Enable a [PodDisruptionBudget](https://kubernetes.io/docs/tasks/run-application/configure-pdb/) for Benthos.

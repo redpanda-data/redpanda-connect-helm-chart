@@ -33,11 +33,13 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | serviceaccount.create                         | Enables creation of serviceaccount               | false              |
 | serviceaccount.annotations                    | Sets serviceaccount annotations                  | {}                 |
 | serviceaccount.name                           | Sets serviceaccount name                         | ""                 |
-| podAnnotations                                | Sets pod annotations                             | {}                 |
-| podLabels                                     | Sets pod labels                                  | {}                 |
+| deployment.podAnnotations                     | Sets pod annotations                             | {}                 |
+| deployment.podLabels                          | Sets pod labels                                  | {}                 |
+| deployment.annotations                        | Set annotations on the Benthos Deployment        | {}                 |
+| deployment.terminationGracePeriodSeconds      | Override Benthos terminationGracePeriodSeconds.  | 60                 |
 | commonLabels                                  | Add labels that are common for all k8s components| ""                 |
 | podSecurityContext                            | Sets pod security context                        | {}                 |
-| command                                       | Replaces entrypoint command of benthos docker     | ""                 |
+| command                                       | Replaces entrypoint command of benthos docker    | ""                 |
 | args                                          | Override default arguments passed with `command` | ""                 |
 | securityContext                               | Sets security context                            | {}                 |
 | service.type                                  | Kubernetes service type                          | ClusterIP          |
@@ -49,7 +51,6 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | ingress.hosts                                 | Sets ingress hosts configuration                 | []                 |
 | env                                           | Sets benthos environment variables               | []                 |
 | updateStrategy                                | Add Deployment Strategy                          | {}                 |
-| workloadResourceAnnotations                   | Set annotations on the Benthos Deployment        | {}                 |
 | resources                                     | Set pod resource limits and/or requests          | {}                 |
 | autoscaling.enabled                           | Enables the horizontal pod autoscaler            | false              |
 | autoscaling.minReplicas                       | Sets min number of replicas                      | 1                  |

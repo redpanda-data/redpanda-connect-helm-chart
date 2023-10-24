@@ -2,7 +2,17 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+
+deployment: 
+  replicaCount: 1
+  podAnnotations: {}
+  podLabels: {}
+  # annotations -- Set annotations on the Benthos Deployment
+  annotations: {}
+  # Default 60. ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
+  terminationGracePeriodSeconds: 60
+
+
 
 # commonLabels -- Add additional labels to all created resources.
 commonLabels: {}
@@ -25,9 +35,6 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
-
-podAnnotations: {}
-podLabels: {}
 
 podSecurityContext: {}
   # fsGroup: 2000

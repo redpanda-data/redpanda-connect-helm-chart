@@ -170,6 +170,19 @@ http:
     # Create a secret of type `kubernetes.io/tls` in the same namespace and add the name here
     # secretName: ""
 
+serviceMonitor:
+  enabled: false
+  interval: "10s"
+
+# metrics:
+#   prometheus: {}
+#
+# tracing:
+#   openTelemetry:
+#     http: []
+#     grpc: []
+#     tags: {}
+
 # command -- Command replaces the entrypoint command of the docker
 command: []
 

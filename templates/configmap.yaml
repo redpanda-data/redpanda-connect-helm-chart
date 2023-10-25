@@ -12,7 +12,7 @@ data:
       {{- toYaml . | nindent 6}} 
     {{- end }}
     {{- with .Values.tracing }}
-    tracers:
+    tracer:
       {{- toYaml . | nindent 6}}
     {{- end }}
     http:

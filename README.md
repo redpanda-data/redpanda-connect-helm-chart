@@ -1,6 +1,6 @@
 [![Chart status](https://img.shields.io/badge/Chart%20status-WIP-yellow)](https://github.com/benthosdev/benthos-helm-chart)
 [![benthos](https://img.shields.io/badge/benthos-v4.11.0-green)](https://github.com/Jeffail/benthos/releases/tag/v4.11.0)
-[![Chart version](https://img.shields.io/badge/Chart%20version-v0.7.2-green)](https://github.com/benthosdev/benthos-helm-chart/releases/tag/0.7.2)
+[![Chart version](https://img.shields.io/badge/Chart%20version-v0.8.0-green)](https://github.com/benthosdev/benthos-helm-chart/releases/tag/0.8.0)
 
 # benthos-helm-chart
 
@@ -33,11 +33,13 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | serviceaccount.create                         | Enables creation of serviceaccount               | false              |
 | serviceaccount.annotations                    | Sets serviceaccount annotations                  | {}                 |
 | serviceaccount.name                           | Sets serviceaccount name                         | ""                 |
-| podAnnotations                                | Sets pod annotations                             | {}                 |
-| podLabels                                     | Sets pod labels                                  | {}                 |
+| deployment.podAnnotations                     | Sets pod annotations                             | {}                 |
+| deployment.podLabels                          | Sets pod labels                                  | {}                 |
+| deployment.annotations                        | Set annotations on the Benthos Deployment        | {}                 |
+| deployment.terminationGracePeriodSeconds      | Override Benthos terminationGracePeriodSeconds.  | 60                 |
 | commonLabels                                  | Add labels that are common for all k8s components| ""                 |
 | podSecurityContext                            | Sets pod security context                        | {}                 |
-| command                                       | Replaces entrypoint command of benthos docker     | ""                 |
+| command                                       | Replaces entrypoint command of benthos docker    | ""                 |
 | args                                          | Override default arguments passed with `command` | ""                 |
 | securityContext                               | Sets security context                            | {}                 |
 | service.type                                  | Kubernetes service type                          | ClusterIP          |
@@ -48,6 +50,7 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | ingress.tls                                   | Sets ingress TLS configuration                   | []                 |
 | ingress.hosts                                 | Sets ingress hosts configuration                 | []                 |
 | env                                           | Sets benthos environment variables               | []                 |
+| envFrom                                       | Define env variables from Secrets or ConfigMaps  | []                 |
 | updateStrategy                                | Add Deployment Strategy                          | {}                 |
 | resources                                     | Set pod resource limits and/or requests          | {}                 |
 | autoscaling.enabled                           | Enables the horizontal pod autoscaler            | false              |
@@ -75,6 +78,7 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | podDisruptionBudget.minAvailable              | Min number of pods available at all times        | ""                 |
 | podDisruptionBudget.maxUnavailable            | Max unavailable number of pods                   | ""                 |
 | watch                                         | Enables watch mode                               | false              |
+| topologySpreadConstraints                     | Configure topology spread constraints            | []                 |
 | initContainers                                | Add any custom init container                    | []                 |
 | config                                        | Benthos component configuration                  | ""                 |
 

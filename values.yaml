@@ -106,6 +106,21 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
+  
+  # autoscaling.customMetric -- Target a custom metric for autoscaling.
+  customMetric: {}
+    #  - type: Pods
+    #    pods:
+    #      metric:
+    #        name: utilization
+    #      target:
+    #        type: AverageValue
+    #        averageValue: 95
+  
+  # autoscaling.behavior -- Configure separate scale-up and scale-down behaviors.
+  behavior: {}
+    # scaleDown:
+    #   stabilizationWindowSeconds: 300
 
 nodeSelector: {}
 

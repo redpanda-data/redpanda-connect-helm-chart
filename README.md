@@ -58,6 +58,8 @@ For more information on configuring the HTTP component, refer to the [Benthos HT
 | autoscaling.maxReplicas                       | Sets max numbers of replicas                     | 100                |
 | autoscaling.targetCPUUtilizationPercentage    | Sets desired CPU autoscaling threshold           | 80                 |
 | autoscaling.targetMemoryUtilizationPercentage | Sets desired memory autoscaling threshold        | 80                 |
+| autoscaling.behavior                          | Custom scale-up and scale-down behaviors         | {}                 |
+| autoscaling.customMetric                      | Target a custom metric for autoscaling           | {}                 |
 | nodeSelector                                  | Sets node selector configuration                 | {}                 |
 | tolerations                                   | Sets tolerations configuration                   | []                 |
 | affinity                                      | Sets affinity configuration                      | {}                 |

@@ -25,4 +25,11 @@ spec:
         name: cpu
         targetAverageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
     {{- end }}
+    {{- with .Values.autoscaling.customMetric -}}
+    {{ toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with .Values.autoscaling.behavior }}
+  behavior:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
 {{- end }}

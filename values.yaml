@@ -191,12 +191,17 @@ serviceMonitor:
 
 # metrics:
 #   prometheus: {}
-#
+
 # tracing:
 #   openTelemetry:
 #     http: []
 #     grpc: []
 #     tags: {}
+
+# logger:
+#   level: INFO
+#   static_fields:
+#     '@service': benthos
 
 # command -- Command replaces the entrypoint command of the docker
 command: []

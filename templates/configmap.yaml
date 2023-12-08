@@ -7,6 +7,10 @@ metadata:
     {{- include "benthos.labels" . | nindent 4 }}
 data:
   benthos.yaml: |
+    {{- with .Values.logger }}
+    logger:
+      {{- toYaml . | nindent 6}} 
+    {{- end }}
     {{- with .Values.metrics }}
     metrics:
       {{- toYaml . | nindent 6}} 

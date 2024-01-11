@@ -14,7 +14,7 @@ spec:
       name: {{ .Values.service.name }}
 
   {{- with .Values.service.extraPorts }}
-    {{- toYaml .Values.args | nindent 4 }}
+    {{- toYaml . | nindent 4 }}
   {{- end }}
   selector:
     {{- include "benthos.selectorLabels" . | nindent 4 }}

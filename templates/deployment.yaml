@@ -20,7 +20,9 @@ spec:
   template:
     metadata:
       annotations:
+        {{- with .Values.deployment.rolloutConfigMap }}
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- end}}
       {{- with .Values.deployment.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -83,14 +85,14 @@ spec:
             httpGet:
               path: /ping
               port: http
-              {{- if and .Values.http.tls .Values.http.tls.enabled }}
+              {{- if and .Values.http.cert_file .Values.http.key_file}}
               scheme: HTTPS
               {{- end }}
           readinessProbe:
             httpGet:
               path: /ready
               port: http
-              {{- if and .Values.http.tls .Values.http.tls.enabled }}
+              {{- if and .Values.http.cert_file .Values.http.key_file}}
               scheme: HTTPS
               {{- end }}
           {{- end }}

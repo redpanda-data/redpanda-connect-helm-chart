@@ -1,32 +1,23 @@
 name: Test chart
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+  workflow_dispatch:
+  pull_request:
 
 jobs:
-  test_chart:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: v3.8.1
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Create kind cluster
-        uses: helm/kind-action@v1.2.0
-
-      - name: Test chart 1
-        run: helm install test-1 . -f .github/test-values-1.yaml
-
-      - name: Install test 2 configMap
-        run: kubectl apply -f .github/test-values-2-cm.yaml
-
-      - name: Test chart 2
-        run: helm install test-2 . -f .github/test-values-2.yaml
+      - name: Test
+        run: make test

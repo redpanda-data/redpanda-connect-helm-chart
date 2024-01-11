@@ -8,11 +8,13 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-  {{- range .Values.service.ports }}
-    -
-      {{- range $key, $val := . }}
-      {{ $key }}: {{ tpl (toString $val) $ }}
-      {{- end }}
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: {{ .Values.service.protocol }}
+      name: {{ .Values.service.name }}
+
+  {{- with .Values.service.extraPorts }}
+    {{- toYaml .Values.args | nindent 4 }}
   {{- end }}
   selector:
     {{- include "benthos.selectorLabels" . | nindent 4 }}

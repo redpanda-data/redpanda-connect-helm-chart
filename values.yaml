@@ -45,13 +45,13 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
+  name: http
   type: ClusterIP
-  ports:
-    # Override this as 443 when .Values.http.tls.enabled is true
-    - name: http
-      port: 80
-      targetPort: http
-      protocol: TCP
+  port: 80
+  targetPort: http
+  protocol: TCP
+
+  extraPorts:
     # - name: extraPort
     #   port: 9999
     #   targetPort: 9999

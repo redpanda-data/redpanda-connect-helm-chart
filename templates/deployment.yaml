@@ -85,14 +85,14 @@ spec:
             httpGet:
               path: /ping
               port: http
-              {{- if .Values.http.tls.enabled }}
+              {{- if and .Values.http.tls .Values.http.tls.enabled }}
               scheme: HTTPS
               {{- end }}
           readinessProbe:
             httpGet:
               path: /ready
               port: http
-              {{- if .Values.http.tls.enabled }}
+              {{- if and .Values.http.tls .Values.http.tls.enabled }}
               scheme: HTTPS
               {{- end }}
           {{- end }}
@@ -111,7 +111,7 @@ spec:
               mountPath: "/benthos.yaml"
               subPath: "benthos.yaml"
               readOnly: true
-            {{- if and .Values.http.tls.enabled .Values.http.tls.secretName }}
+            {{- if and .Values.http.tls .Values.http.tls.enabled .Values.http.tls.secretName }}
             - name: tls
               mountPath: "/tls"
               readOnly: true
@@ -146,7 +146,7 @@ spec:
         - name: config
           configMap:
             name: {{ template "benthos.fullname" . }}-config
-        {{- if and .Values.http.tls.enabled .Values.http.tls.secretName }}
+        {{- if and .Values.http.tls .Values.http.tls.enabled .Values.http.tls.secretName }}
         - name: tls
           secret:
             secretName: {{ .Values.http.tls.secretName }}

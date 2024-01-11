@@ -19,26 +19,10 @@ data:
     tracer:
       {{- toYaml . | nindent 6}}
     {{- end }}
+    {{- with .Values.http }}
     http:
-      enabled: {{ .Values.http.enabled }}
-      {{- if .Values.http.enabled }}
-      address: {{ .Values.http.address | default "0.0.0.0:4195" }}
-      root_path: {{ .Values.http.rootPath | default "/benthos" }}
-      debug_endpoints: {{ .Values.http.debugEndpoints | default false }}
-      {{- end -}}
-      {{ if and .Values.http.tls.enabled .Values.http.tls.secretName }}
-      cert_file: "/tls/tls.crt"
-      key_file: "/tls/tls.key"
-      {{- end -}}
-      {{ if and .Values.http.enabled .Values.http.cors.enabled }}
-      cors:
-        enabled: {{ .Values.http.cors.enabled }}
-        {{- if and .Values.http.cors.enabled .Values.http.cors.allowedOrigins }}
-        allowed_origins: {{- range .Values.http.cors.allowedOrigins }}
-          - {{ . }}
-          {{- end }}
-        {{- end }}
-      {{- end -}}
+      {{- toYaml . | nindent 6}}
+    {{- end }}
     {{- if and .Values.config (ne .Values.streams.enabled true) }}
     {{- tpl .Values.config . | nindent 4 }}
     {{- else if and .Values.streams.enabled .Values.streams.streamsConfigMap }}

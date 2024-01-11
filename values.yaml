@@ -2,8 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-
-deployment: 
+deployment:
   replicaCount: 1
   podAnnotations: {}
   podLabels: {}
@@ -11,8 +10,6 @@ deployment:
   annotations: {}
   # Default 60. ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
   terminationGracePeriodSeconds: 60
-
-
 
 # commonLabels -- Add additional labels to all created resources.
 commonLabels: {}
@@ -103,24 +100,27 @@ resources: {}
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
-  
-  # autoscaling.customMetric -- Target a custom metric for autoscaling.
-  customMetric: {}
-    #  - type: Pods
-    #    pods:
-    #      metric:
-    #        name: utilization
-    #      target:
-    #        type: AverageValue
-    #        averageValue: 95
-  
-  # autoscaling.behavior -- Configure separate scale-up and scale-down behaviors.
-  behavior: {}
-    # scaleDown:
-    #   stabilizationWindowSeconds: 300
+  maxReplicas: 12
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
+#   - type: Resource
+#     resource:
+#       name: memory
+#       target:
+#         type: Utilization
+#         averageUtilization: 80
+#   behavior:
+#     scaleDown:
+#       stabilizationWindowSeconds: 300
+#       policies:
+#       - type: Pods
+#         value: 1
+#         periodSeconds: 60
 
 nodeSelector: {}
 

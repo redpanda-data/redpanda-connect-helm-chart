@@ -1,0 +1,97 @@
+suite: configuration tests
+templates:
+  - configmap.yaml
+tests:
+  - it: should set default configuration
+    asserts:
+      - matchSnapshot:
+          path: data
+
+  - it: should set http options
+    set:
+      http:
+        address: 127.0.0.0:4095
+        cert_file: "/my/cert"
+        key_file: "/my/cert.key"
+        cors:
+          enabled: true
+          allowed_origins: []
+        basic_auth:
+          enabled: true
+          username: "test"
+          password_hash: "test"
+          algorithm: "sha256"
+          salt: "test"
+    asserts:
+      - matchSnapshot:
+          path: data
+
+  - it: should set logging options
+    set:
+      logger:
+        level: INFO
+        format: logfmt
+        add_timestamp: false
+        static_fields:
+          "@service": benthos
+    asserts:
+      - matchSnapshot:
+          path: data
+
+  - it: should set tracing options
+    set:
+      tracing:
+        jaeger:
+          agent_address: localhost:6831
+          sampler_type: const
+          sampler_param: 1
+    asserts:
+      - matchSnapshot:
+          path: data
+
+  - it: should set metrics options
+    set:
+      metrics:
+        statsd:
+          address: localhost:8125
+          flush_period: 100ms
+    asserts:
+      - matchSnapshot:
+          path: data
+
+  - it: can set global options with streams mode
+    set:
+      streams:
+        enabled: true
+        streamsConfigMap: my-config-map
+      http:
+        address: 127.0.0.0:4095
+        cert_file: "/my/cert"
+        key_file: "/my/cert.key"
+        cors:
+          enabled: true
+          allowed_origins: []
+        basic_auth:
+          enabled: true
+          username: "test"
+          password_hash: "test"
+          algorithm: "sha256"
+          salt: "test"
+      logger:
+        level: INFO
+        format: logfmt
+        add_timestamp: false
+        static_fields:
+          "@service": benthos
+      tracing:
+        jaeger:
+          agent_address: localhost:6831
+          sampler_type: const
+          sampler_param: 1
+      metrics:
+        statsd:
+          address: localhost:8125
+          flush_period: 100ms
+    asserts:
+      - matchSnapshot:
+          path: data

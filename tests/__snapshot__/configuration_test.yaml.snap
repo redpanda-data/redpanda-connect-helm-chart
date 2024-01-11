@@ -1,0 +1,153 @@
+can set global options with streams mode:
+  1: |
+    benthos.yaml: |-
+      logger:
+        add_timestamp: false
+        format: logfmt
+        level: INFO
+        static_fields:
+          '@service': benthos
+      metrics:
+        statsd:
+          address: localhost:8125
+          flush_period: 100ms
+      tracer:
+        jaeger:
+          agent_address: localhost:6831
+          sampler_param: 1
+          sampler_type: const
+      http:
+        address: 127.0.0.0:4095
+        basic_auth:
+          algorithm: sha256
+          enabled: true
+          password_hash: test
+          salt: test
+          username: test
+        cert_file: /my/cert
+        cors:
+          allowed_origins: []
+          enabled: true
+        debug_endpoints: false
+        enabled: true
+        key_file: /my/cert.key
+        root_path: /benthos
+should set default configuration:
+  1: |
+    benthos.yaml: |-
+      http:
+        address: 0.0.0.0:4195
+        cors:
+          enabled: false
+        debug_endpoints: false
+        enabled: true
+        root_path: /benthos
+      input:
+        label: "no_config_in"
+        generate:
+          mapping: root = "This Benthos instance is unconfigured!"
+          interval: 1m
+      output:
+        label: "no_config_out"
+        stdout:
+          codec: lines
+should set http options:
+  1: |
+    benthos.yaml: |-
+      http:
+        address: 127.0.0.0:4095
+        basic_auth:
+          algorithm: sha256
+          enabled: true
+          password_hash: test
+          salt: test
+          username: test
+        cert_file: /my/cert
+        cors:
+          allowed_origins: []
+          enabled: true
+        debug_endpoints: false
+        enabled: true
+        key_file: /my/cert.key
+        root_path: /benthos
+      input:
+        label: "no_config_in"
+        generate:
+          mapping: root = "This Benthos instance is unconfigured!"
+          interval: 1m
+      output:
+        label: "no_config_out"
+        stdout:
+          codec: lines
+should set logging options:
+  1: |
+    benthos.yaml: |-
+      logger:
+        add_timestamp: false
+        format: logfmt
+        level: INFO
+        static_fields:
+          '@service': benthos
+      http:
+        address: 0.0.0.0:4195
+        cors:
+          enabled: false
+        debug_endpoints: false
+        enabled: true
+        root_path: /benthos
+      input:
+        label: "no_config_in"
+        generate:
+          mapping: root = "This Benthos instance is unconfigured!"
+          interval: 1m
+      output:
+        label: "no_config_out"
+        stdout:
+          codec: lines
+should set metrics options:
+  1: |
+    benthos.yaml: |-
+      metrics:
+        statsd:
+          address: localhost:8125
+          flush_period: 100ms
+      http:
+        address: 0.0.0.0:4195
+        cors:
+          enabled: false
+        debug_endpoints: false
+        enabled: true
+        root_path: /benthos
+      input:
+        label: "no_config_in"
+        generate:
+          mapping: root = "This Benthos instance is unconfigured!"
+          interval: 1m
+      output:
+        label: "no_config_out"
+        stdout:
+          codec: lines
+should set tracing options:
+  1: |
+    benthos.yaml: |-
+      tracer:
+        jaeger:
+          agent_address: localhost:6831
+          sampler_param: 1
+          sampler_type: const
+      http:
+        address: 0.0.0.0:4195
+        cors:
+          enabled: false
+        debug_endpoints: false
+        enabled: true
+        root_path: /benthos
+      input:
+        label: "no_config_in"
+        generate:
+          mapping: root = "This Benthos instance is unconfigured!"
+          interval: 1m
+      output:
+        label: "no_config_out"
+        stdout:
+          codec: lines

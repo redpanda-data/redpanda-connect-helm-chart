@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       annotations:
-        {{- with .Values.deployment.rolloutConfigMap }}
+        {{- if .Values.deployment.rolloutConfigMap }}
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         {{- end}}
       {{- with .Values.deployment.podAnnotations }}

@@ -236,4 +236,4 @@ watch: false
 topologySpreadConstraints: []
 
 # /benthos.yaml configuration
-config: |
+config: {}

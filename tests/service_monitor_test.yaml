@@ -1,0 +1,36 @@
+suite: service monitor tests
+templates:
+  - servicemonitor.yaml
+tests:
+  - it: should set scheme
+    set:
+      serviceMonitor:
+        enabled: true
+        scheme: https
+    asserts:
+      - equal:
+          path: spec.endpoints[0].scheme
+          value: https
+
+  - it: should set scheme default
+    set:
+      serviceMonitor:
+        enabled: true
+    asserts:
+      - equal:
+          path: spec.endpoints[0].scheme
+          value: http
+
+  - it: should set basic auth
+    set:
+      serviceMonitor:
+        enabled: true
+        basicAuth:
+          username: foo
+          password: bar
+    asserts:
+      - equal:
+          path: spec.basicAuth
+          value:
+            username: foo
+            password: bar

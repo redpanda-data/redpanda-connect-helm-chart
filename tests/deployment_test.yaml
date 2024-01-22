@@ -19,14 +19,22 @@ tests:
           path: spec.template.spec.containers[0].livenessProbe
           value:
             httpGet:
+              failureThreshold: 3
               path: /ping
+              periodSeconds: 5
               port: http
+              successThreshold: 1
+              timeoutSeconds: 2
       - equal:
           path: spec.template.spec.containers[0].readinessProbe
           value:
             httpGet:
+              failureThreshold: 1
               path: /ready
+              periodSeconds: 5
               port: http
+              successThreshold: 1
+              timeoutSeconds: 2
 
   - it: should enable http custom
     set:
@@ -46,14 +54,79 @@ tests:
           path: spec.template.spec.containers[0].livenessProbe
           value:
             httpGet:
+              failureThreshold: 3
               path: /ping
+              periodSeconds: 5
               port: http
+              successThreshold: 1
+              timeoutSeconds: 2
       - equal:
           path: spec.template.spec.containers[0].readinessProbe
           value:
             httpGet:
+              failureThreshold: 1
               path: /ready
+              periodSeconds: 5
               port: http
+              successThreshold: 1
+              timeoutSeconds: 2
+
+  - it: should enable probes custom
+    set:
+      deployment:
+        rolloutConfigMap: false
+        livenessProbe:
+          failureThreshold: 5
+          periodSeconds: 10
+          successThreshold: 5
+          timeoutSeconds: 4
+          httpHeaders:
+            - name: My-Header
+              value: Bar
+        readinessProbe:
+          failureThreshold: 6
+          periodSeconds: 12
+          successThreshold: 6
+          timeoutSeconds: 5
+          httpHeaders:
+            - name: My-Header
+              value: Foo
+      http:
+        enabled: true
+        address: "127.0.0.1:5555"
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].ports
+          value:
+            - containerPort: 5555
+              name: http
+              protocol: TCP
+      - equal:
+          path: spec.template.spec.containers[0].livenessProbe
+          value:
+            httpGet:
+              failureThreshold: 5
+              path: /ping
+              periodSeconds: 10
+              port: http
+              successThreshold: 5
+              timeoutSeconds: 4
+              httpHeaders:
+                - name: My-Header
+                  value: Bar
+      - equal:
+          path: spec.template.spec.containers[0].readinessProbe
+          value:
+            httpGet:
+              failureThreshold: 6
+              path: /ready
+              periodSeconds: 12
+              port: http
+              successThreshold: 6
+              timeoutSeconds: 5
+              httpHeaders:
+                - name: My-Header
+                  value: Foo
 
   - it: should enable streams
     set:

@@ -13,6 +13,23 @@ deployment:
   # Rollout the deployment on ConfigMap changes
   rolloutConfigMap: true
 
+  readinessProbe:
+    failureThreshold: 1
+    periodSeconds: 5
+    successThreshold: 1
+    timeoutSeconds: 2
+  #   httpHeaders:
+  #   - name: My-Header
+  #     value: Bar
+  livenessProbe:
+    failureThreshold: 3
+    periodSeconds: 5
+    successThreshold: 1
+    timeoutSeconds: 2
+  #   httpHeaders:
+  #   - name: My-Header
+  #     value: Bar
+
 # commonLabels -- Add additional labels to all created resources.
 commonLabels: {}
 

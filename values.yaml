@@ -208,6 +208,10 @@ http:
 serviceMonitor:
   enabled: false
   interval: "10s"
+  scheme: http
+  # basicAuth:
+  #   username: foo
+  #   password: bar
 
 # metrics:
 #   prometheus: {}

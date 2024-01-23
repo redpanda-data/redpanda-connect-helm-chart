@@ -30,7 +30,23 @@ tests:
           password: bar
     asserts:
       - equal:
-          path: spec.basicAuth
+          path: spec.endpoints[0].basicAuth
           value:
             username: foo
             password: bar
+
+  - it: should set tlsConfig
+    set:
+      serviceMonitor:
+        enabled: true
+        tlsConfig:
+          ca: my-ca
+          cert: my-cert
+          keySecret: secret
+    asserts:
+      - equal:
+          path: spec.endpoints[0].basicAuth
+          value:
+            ca: my-ca
+            cert: my-cert
+            keySecret: secret

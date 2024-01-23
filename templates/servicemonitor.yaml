@@ -6,15 +6,19 @@ metadata:
   labels:
     {{- include "benthos.labels" . | nindent 4 }}
 spec:
-  {{- with .Values.serviceMonitor.basicAuth }}
-  basicAuth:
-      {{- toYaml . | nindent 4 }}
-  {{- end }}
   endpoints:
     - interval: {{ .Values.serviceMonitor.interval}}
       targetPort: http
       path: /metrics
       scheme: {{ .Values.serviceMonitor.scheme }}
+      {{- with .Values.serviceMonitor.basicAuth }}
+      basicAuth:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.serviceMonitor.tlsConfig }}
+      tlsConfig:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
   namespaceSelector:
     matchNames:
       - {{ .Release.Namespace }}

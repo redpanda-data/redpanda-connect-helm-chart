@@ -212,6 +212,10 @@ serviceMonitor:
   # basicAuth:
   #   username: foo
   #   password: bar
+  # tlsConfig:
+  #   ca: my-ca
+  #   cert: my-cert
+  #   keySecret: secret
 
 # metrics:
 #   prometheus: {}

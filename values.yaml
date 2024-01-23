@@ -18,17 +18,25 @@ deployment:
     periodSeconds: 5
     successThreshold: 1
     timeoutSeconds: 2
-  #   httpHeaders:
-  #   - name: My-Header
-  #     value: Bar
+    httpGet:
+      path: /ping
+      port: http
+      # scheme: HTTPS
+      # httpHeaders:
+      # - name: My-Header
+      #   value: Bar
   livenessProbe:
     failureThreshold: 3
     periodSeconds: 5
     successThreshold: 1
     timeoutSeconds: 2
-  #   httpHeaders:
-  #   - name: My-Header
-  #     value: Bar
+    httpGet:
+      path: /ready
+      port: http
+      # scheme: HTTPS
+      # httpHeaders:
+      # - name: My-Header
+      #   value: Bar
 
 # commonLabels -- Add additional labels to all created resources.
 commonLabels: {}

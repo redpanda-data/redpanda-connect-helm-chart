@@ -82,21 +82,9 @@ spec:
               protocol: TCP
           {{- if .Values.http.enabled }}
           livenessProbe:
-            httpGet:
-              path: /ping
-              port: http
-              {{- if and .Values.http.cert_file .Values.http.key_file}}
-              scheme: HTTPS
-              {{- end }}
-              {{- toYaml .Values.deployment.livenessProbe | nindent 14 }}
+            {{- toYaml .Values.deployment.livenessProbe | nindent 12 }}
           readinessProbe:
-            httpGet:
-              path: /ready
-              port: http
-              {{- if and .Values.http.cert_file .Values.http.key_file}}
-              scheme: HTTPS
-              {{- end }}
-              {{- toYaml .Values.deployment.readinessProbe | nindent 14 }}
+            {{- toYaml .Values.deployment.readinessProbe | nindent 12 }}
           {{- end }}
           env:
             {{- toYaml .Values.env | nindent 12 }}

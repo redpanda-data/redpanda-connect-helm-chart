@@ -37,7 +37,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "benthos.serviceAccountName" . }}
-      restartPolicy: {{ .Values.podRestartPolicy }}
+      restartPolicy: {{ .Values.deployment.restartPolicy }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       terminationGracePeriodSeconds: {{ default 60 .Values.deployment.terminationGracePeriodSeconds }}

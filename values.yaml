@@ -38,8 +38,8 @@ deployment:
       # - name: My-Header
       #   value: Bar
 
-# podRestartPolicy - Container restart policy. ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
-podRestartPolicy: Always
+  # podRestartPolicy - Container restart policy. ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
+  podRestartPolicy: Always
 
 # commonLabels -- Add additional labels to all created resources.
 commonLabels: {}

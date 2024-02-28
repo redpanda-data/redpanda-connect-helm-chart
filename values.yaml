@@ -39,7 +39,7 @@ deployment:
       #   value: Bar
 
   # podRestartPolicy - Container restart policy. ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
-  podRestartPolicy: Always
+  restartPolicy: Always
 
 # commonLabels -- Add additional labels to all created resources.
 commonLabels: {}

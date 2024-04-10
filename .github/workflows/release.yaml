@@ -7,8 +7,6 @@ on:
 
 jobs:
   release:
-    needs: tag_release
-    if: needs.tag_release.outputs.tag_release_outcome == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

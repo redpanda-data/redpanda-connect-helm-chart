@@ -24,9 +24,15 @@ data:
       {{- toYaml . | nindent 6}}
     {{- end }}
     {{- if and .Values.config (ne .Values.streams.enabled true) }}
-    {{- with .Values.config }}
-    {{- toYaml . | trimPrefix "|" | nindent 4}}
-    {{- end }}
+
+    {{- if kindIs "string" .Values.config }}
+    {{- tpl .Values.config . | nindent 4}}
+    {{- else if kindIs "map[string]interface{}" .Values.config }}
+    {{- toYaml (.Values.config | fromYaml) | nindent 4}}
+    {{- else }}
+    {{- toYaml .Values.config | nindent 4}}
+    {{- end -}}
+
     {{- else if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
     {{- else }}
     input:

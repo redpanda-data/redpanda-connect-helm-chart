@@ -18,17 +18,28 @@ deployment:
     periodSeconds: 5
     successThreshold: 1
     timeoutSeconds: 2
-  #   httpHeaders:
-  #   - name: My-Header
-  #     value: Bar
+    httpGet:
+      path: /ready
+      port: http
+      # scheme: HTTPS
+      # httpHeaders:
+      # - name: My-Header
+      #   value: Bar
   livenessProbe:
     failureThreshold: 3
     periodSeconds: 5
     successThreshold: 1
     timeoutSeconds: 2
-  #   httpHeaders:
-  #   - name: My-Header
-  #     value: Bar
+    httpGet:
+      path: /ping
+      port: http
+      # scheme: HTTPS
+      # httpHeaders:
+      # - name: My-Header
+      #   value: Bar
+
+  # podRestartPolicy - Container restart policy. ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
+  restartPolicy: Always
 
 # commonLabels -- Add additional labels to all created resources.
 commonLabels: {}
@@ -212,6 +223,10 @@ serviceMonitor:
   # basicAuth:
   #   username: foo
   #   password: bar
+  # tlsConfig:
+  #   ca: my-ca
+  #   cert: my-cert
+  #   keySecret: secret
 
 # metrics:
 #   prometheus: {}

@@ -18,23 +18,24 @@ tests:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
           value:
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
             httpGet:
-              failureThreshold: 3
-              path: /ping
-              periodSeconds: 5
+              path: /ping  
               port: http
-              successThreshold: 1
-              timeoutSeconds: 2
+
       - equal:
           path: spec.template.spec.containers[0].readinessProbe
           value:
+            failureThreshold: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
             httpGet:
-              failureThreshold: 1
               path: /ready
-              periodSeconds: 5
               port: http
-              successThreshold: 1
-              timeoutSeconds: 2
 
   - it: should enable http custom
     set:
@@ -53,23 +54,24 @@ tests:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
           value:
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
             httpGet:
-              failureThreshold: 3
-              path: /ping
-              periodSeconds: 5
+              path: /ping  
               port: http
-              successThreshold: 1
-              timeoutSeconds: 2
+
       - equal:
           path: spec.template.spec.containers[0].readinessProbe
           value:
+            failureThreshold: 1
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
             httpGet:
-              failureThreshold: 1
               path: /ready
-              periodSeconds: 5
               port: http
-              successThreshold: 1
-              timeoutSeconds: 2
 
   - it: should enable probes custom
     set:
@@ -80,17 +82,19 @@ tests:
           periodSeconds: 10
           successThreshold: 5
           timeoutSeconds: 4
-          httpHeaders:
-            - name: My-Header
-              value: Bar
+          httpGet:
+            httpHeaders:
+              - name: My-Header
+                value: Bar
         readinessProbe:
           failureThreshold: 6
           periodSeconds: 12
           successThreshold: 6
           timeoutSeconds: 5
-          httpHeaders:
-            - name: My-Header
-              value: Foo
+          httpGet:
+            httpHeaders:
+              - name: My-Header
+                value: Foo
       http:
         enabled: true
         address: "127.0.0.1:5555"
@@ -104,26 +108,26 @@ tests:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe
           value:
+            failureThreshold: 5
+            periodSeconds: 10
+            successThreshold: 5
+            timeoutSeconds: 4
             httpGet:
-              failureThreshold: 5
               path: /ping
-              periodSeconds: 10
               port: http
-              successThreshold: 5
-              timeoutSeconds: 4
               httpHeaders:
                 - name: My-Header
                   value: Bar
       - equal:
           path: spec.template.spec.containers[0].readinessProbe
           value:
+            successThreshold: 6
+            timeoutSeconds: 5
+            periodSeconds: 12
+            failureThreshold: 6
             httpGet:
-              failureThreshold: 6
               path: /ready
-              periodSeconds: 12
               port: http
-              successThreshold: 6
-              timeoutSeconds: 5
               httpHeaders:
                 - name: My-Header
                   value: Foo

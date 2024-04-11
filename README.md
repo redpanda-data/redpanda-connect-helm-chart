@@ -10,7 +10,7 @@ This Helm Chart deploys a single Benthos instance in either streams mode or stan
 
 ## Installation
 ```bash
-helm repo add benthos https://benthosdev.github.io/benthos-helm-chart/
+helm repo add benthos https://benthosdev.github.io/charts/
 helm repo update
 
 helm install benthos/benthos

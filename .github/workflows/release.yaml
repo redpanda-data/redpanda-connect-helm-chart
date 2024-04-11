@@ -60,8 +60,9 @@ jobs:
           owner: benthosdev
           repository: charts
           branch: main
+          target_dir: benthos
           index_dir: .
-          charts_dir: .
+          charts_dir: ../
           charts_url: https://benthosdev.github.io/charts
           commit_username: blobbot-helm
           commit_email: blobbot-helm@github.com

@@ -45,6 +45,7 @@ deployment:
 commonLabels: {}
 
 image:
+  registry: docker.io
   repository: "jeffail/benthos"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.

@@ -103,7 +103,7 @@ spec:
               subPath: "benthos.yaml"
               readOnly: true
             {{- if .Values.extraVolumeMounts }}
-              {{ - toYaml .Values.extraVolumeMounts | nindent 10 }}
+              {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
             {{- end }}
             {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
             - name: streams

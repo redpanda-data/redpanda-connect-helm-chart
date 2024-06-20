@@ -102,10 +102,8 @@ spec:
               mountPath: "/benthos.yaml"
               subPath: "benthos.yaml"
               readOnly: true
-            {{- range .Values.extraVolumeMounts }}
-            - name: {{ .name }}
-              mountPath: {{ .mountPath }}
-              readOnly: {{ .readOnly }}
+            {{- if .Values.extraVolumeMounts }}
+              {{ - toYaml .Values.extraVolumeMounts | nindent 10 }}
             {{- end }}
             {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
             - name: streams

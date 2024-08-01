@@ -45,7 +45,7 @@ deployment:
 commonLabels: {}
 
 image:
-  repository: "jeffail/benthos"
+  repository: "redpandadata/connect"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -232,7 +232,7 @@ serviceMonitor:
 #   prometheus: {}
 
 # tracing:
-#   openTelemetry:
+#   open_telemetry_collector:
 #     http: []
 #     grpc: []
 #     tags: {}

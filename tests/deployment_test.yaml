@@ -204,3 +204,33 @@ tests:
             - configMap:
                 name: my-config-map
               name: streams
+
+  - it: should include extraVolumeMounts
+    set:
+      deployment:
+        rolloutConfigMap: false
+        annotations:
+          - name: foo
+      extraVolumeMounts:
+        - mountPath: /mnt/configmap
+          name: config-map
+          readOnly: false
+          subPath: foo
+        - mountPath: /mnt/secret
+          name: secret
+          readOnly: true
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - name: config
+              mountPath: "/benthos.yaml"
+              subPath: "benthos.yaml"
+              readOnly: true
+            - name: config-map
+              mountPath: /mnt/configmap
+              readOnly: false
+              subPath: foo
+            - mountPath: /mnt/secret
+              name: secret
+              readOnly: true

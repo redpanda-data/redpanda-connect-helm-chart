@@ -105,6 +105,10 @@ spec:
             {{- if .Values.extraVolumeMounts }}
               {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
             {{- end }}
+            {{- if .Values.extraVolumeMountsTemplate }}
+              {{- $extraVolumeMounts := tpl (.Values.extraVolumeMountsTemplate) . | fromYamlArray }}
+              {{- toYaml $extraVolumeMounts | nindent 12 }}
+            {{- end }}
             {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
             - name: streams
               mountPath: "/streams"
@@ -132,6 +136,10 @@ spec:
             name: {{ template "benthos.fullname" . }}-config
         {{- if .Values.extraVolumes }}
           {{- toYaml .Values.extraVolumes | nindent 8 }}
+        {{- end }}
+        {{- if .Values.extraVolumesTemplate }}
+          {{- $extraVolumes := tpl (.Values.extraVolumesTemplate) . | fromYamlArray }}
+          {{- toYaml $extraVolumes | nindent 8 }}
         {{- end }}
         {{- if and .Values.streams.enabled .Values.streams.streamsConfigMap }}
         - name: streams

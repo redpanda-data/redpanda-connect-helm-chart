@@ -188,6 +188,7 @@ extraVolumes:
   # - name: secret
   #   secret:
   #     secretName: s-name
+extraVolumesTemplate:
 
 extraVolumeMounts:
   []
@@ -197,6 +198,7 @@ extraVolumeMounts:
   # - name: secret
   #   mountPath: /mnt/secret
   #   readOnly: true
+extraVolumeMountsTemplate:
 
 streams:
   enabled: false

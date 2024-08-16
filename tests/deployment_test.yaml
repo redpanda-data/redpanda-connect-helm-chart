@@ -251,3 +251,41 @@ tests:
             - configMap:
                 name: my-config-map
               name: streams
+
+  - it: should allow templated volumes and volume mounts
+    set:
+      global:
+        subPath: "some-subpath"
+        pvcName: "some-pvc"
+      deployment:
+        rolloutConfigMap: false
+      extraVolumeMountsTemplate: |
+        - mountPath: /testing
+          name: test
+          readOnly: true
+          subPath: {{ .Values.global.subPath | quote }}
+      extraVolumesTemplate: |
+        - name: test
+          persistentVolumeClaim:
+            claimName: {{ .Values.global.pvcName | quote }}
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - mountPath: /benthos.yaml
+              name: config
+              readOnly: true
+              subPath: benthos.yaml
+            - mountPath: /testing
+              name: test
+              readOnly: true
+              subPath: "some-subpath"
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - configMap:
+                name: RELEASE-NAME-benthos-config
+              name: config
+            - name: test
+              persistentVolumeClaim:
+                claimName: "some-pvc"

@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "benthos.fullname" . }}-config
+  name: {{ template "redpanda-connect.fullname" . }}-config
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "benthos.labels" . | nindent 4 }}
+    {{- include "redpanda-connect.labels" . | nindent 4 }}
 data:
-  benthos.yaml: |
+  redpanda-connect.yaml: |
     {{- with .Values.logger }}
     logger:
-      {{- toYaml . | nindent 6}} 
+      {{- toYaml . | nindent 6}}
     {{- end }}
     {{- with .Values.metrics }}
     metrics:
-      {{- toYaml . | nindent 6}} 
+      {{- toYaml . | nindent 6}}
     {{- end }}
     {{- with .Values.tracing }}
     tracer:
@@ -38,7 +38,7 @@ data:
     input:
       label: "no_config_in"
       generate:
-        mapping: root = "This Benthos instance is unconfigured!"
+        mapping: root = "This Redpanda Connect instance is unconfigured!"
         interval: 1m
     output:
       label: "no_config_out"

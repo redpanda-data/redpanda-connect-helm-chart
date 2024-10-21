@@ -144,16 +144,16 @@ tests:
           path: spec.template.spec.containers[0].args
           value:
             - -c
-            - /benthos.yaml
+            - /redpanda-connect.yaml
             - streams
             - /streams/*.yaml
       - equal:
           path: spec.template.spec.containers[0].volumeMounts
           value:
-            - mountPath: /benthos.yaml
+            - mountPath: /redpanda-connect.yaml
               name: config
               readOnly: true
-              subPath: benthos.yaml
+              subPath: redpanda-connect.yaml
             - mountPath: /streams
               name: streams
               readOnly: true
@@ -161,7 +161,7 @@ tests:
           path: spec.template.spec.volumes
           value:
             - configMap:
-                name: RELEASE-NAME-benthos-config
+                name: RELEASE-NAME-redpanda-connect-config
               name: config
             - configMap:
                 name: my-config-map
@@ -181,17 +181,17 @@ tests:
           path: spec.template.spec.containers[0].args
           value:
             - -c
-            - /benthos.yaml
+            - /redpanda-connect.yaml
             - streams
             - --no-api
             - /streams/*.yaml
       - equal:
           path: spec.template.spec.containers[0].volumeMounts
           value:
-            - mountPath: /benthos.yaml
+            - mountPath: /redpanda-connect.yaml
               name: config
               readOnly: true
-              subPath: benthos.yaml
+              subPath: redpanda-connect.yaml
             - mountPath: /streams
               name: streams
               readOnly: true
@@ -199,7 +199,7 @@ tests:
           path: spec.template.spec.volumes
           value:
             - configMap:
-                name: RELEASE-NAME-benthos-config
+                name: RELEASE-NAME-redpanda-connect-config
               name: config
             - configMap:
                 name: my-config-map
@@ -224,17 +224,17 @@ tests:
           path: spec.template.spec.containers[0].args
           value:
             - -c
-            - /benthos.yaml
+            - /redpanda-connect.yaml
             - streams
             - --no-api
             - /streams/*.yaml
       - equal:
           path: spec.template.spec.containers[0].volumeMounts
           value:
-            - mountPath: /benthos.yaml
+            - mountPath: /redpanda-connect.yaml
               name: config
               readOnly: true
-              subPath: benthos.yaml
+              subPath: redpanda-connect.yaml
             - mountPath: /testing
               name: test
               readOnly: true
@@ -246,7 +246,7 @@ tests:
           path: spec.template.spec.volumes
           value:
             - configMap:
-                name: RELEASE-NAME-benthos-config
+                name: RELEASE-NAME-redpanda-connect-config
               name: config
             - configMap:
                 name: my-config-map

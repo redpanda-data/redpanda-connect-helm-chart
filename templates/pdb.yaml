@@ -2,9 +2,9 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: {{ template "benthos.fullname" . }}
+  name: {{ template "redpanda-connect.fullname" . }}
   labels:
-    {{- include "benthos.labels" . | nindent 4 }}
+    {{- include "redpanda-connect.labels" . | nindent 4 }}
 spec:
 {{- with .Values.podDisruptionBudget.minAvailable }}
   minAvailable: {{ . }}
@@ -14,5 +14,5 @@ spec:
 {{- end }}
   selector:
     matchLabels:
-      {{- include "benthos.selectorLabels" . | nindent 6 }}
+      {{- include "redpanda-connect.selectorLabels" . | nindent 6 }}
 {{- end }}

@@ -1,4 +1,4 @@
-# Default values for benthos.
+# Default values for Redpanda Connect.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -6,7 +6,7 @@ deployment:
   replicaCount: 1
   podAnnotations: {}
   podLabels: {}
-  # annotations -- Set annotations on the Benthos Deployment
+  # annotations -- Set annotations on the Redpanda Connect Deployment
   annotations: {}
   # Default 60. ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
   terminationGracePeriodSeconds: 60
@@ -45,7 +45,7 @@ deployment:
 commonLabels: {}
 
 image:
-  repository: "jeffail/benthos"
+  repository: "docker.redpanda.com/redpandadata/connect"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -117,7 +117,7 @@ env: []
 envFrom:
   []
   # - secretRef:
-  #     name: benthos
+  #     name: redp
 
 resources:
   {}
@@ -164,14 +164,14 @@ tolerations: []
 affinity: {}
 
 podDisruptionBudget:
-  # podDisruptionBudget.enabled -- Enable a [PodDisruptionBudget](https://kubernetes.io/docs/tasks/run-application/configure-pdb/) for Benthos.
+  # podDisruptionBudget.enabled -- Enable a [PodDisruptionBudget](https://kubernetes.io/docs/tasks/run-application/configure-pdb/) for Redpanda Connect.
   enabled: false
   # podDisruptionBudget.minAvailable -- The number of Pods that must still be available after an eviction.
   # minAvailable: 1
   # podDisruptionBudget.maxUnavailable -- (int) The number of Pods that can be unavailable after an eviction.
   # maxUnavailable: 1
 
-# initContainers -- Init Containers to be added to the Benthos Pods.
+# initContainers -- Init Containers to be added to the Redpanda Connect Pods.
 initContainers: []
 
 # DeploymentStrategy: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/
@@ -204,12 +204,12 @@ streams:
   api:
     enable: true
 
-  # /benthos.yaml HTTP configuration
+  # /redpanda-connect.yaml HTTP configuration
 http:
   # Disabling HTTP server will prevent service and ingress objects from being created.
   enabled: true
   address: "0.0.0.0:4195"
-  root_path: "/benthos"
+  root_path: "/redpanda-connect"
   debug_endpoints: false
   cors:
     enabled: false
@@ -240,12 +240,12 @@ serviceMonitor:
 # logger:
 #   level: INFO
 #   static_fields:
-#     '@service': benthos
+#     '@service': redpanda-connect
 
 # command -- Command replaces the entrypoint command of the docker
 command: []
 
-# args -- Override Benthos's default arguments passed with command.
+# args -- Override Redpanda Connect's default arguments passed with command.
 args: []
 
 # EXPERIMENTAL: watch config files for changes and automatically apply them
@@ -254,5 +254,5 @@ watch: false
 # Spread  incoming Pod in relation to the existing Pods across your cluster. https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#topologyspreadconstraints-field
 topologySpreadConstraints: []
 
-# /benthos.yaml configuration
+# /redpanda-connect.yaml configuration
 config: {}

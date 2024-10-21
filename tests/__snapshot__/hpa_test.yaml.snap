@@ -25,7 +25,7 @@ should configure autoscaler custom:
     scaleTargetRef:
       apiVersion: apps/v1
       kind: Deployment
-      name: RELEASE-NAME-benthos
+      name: RELEASE-NAME-redpanda-connect
 should enable autoscaler default:
   1: |
     maxReplicas: 12
@@ -40,4 +40,4 @@ should enable autoscaler default:
     scaleTargetRef:
       apiVersion: apps/v1
       kind: Deployment
-      name: RELEASE-NAME-benthos
+      name: RELEASE-NAME-redpanda-connect

@@ -6,7 +6,7 @@ should enable ingress default:
           paths:
             - backend:
                 service:
-                  name: RELEASE-NAME-benthos
+                  name: RELEASE-NAME-redpanda-connect
                   port:
                     number: 80
               path: /

@@ -33,7 +33,7 @@ tests:
         format: logfmt
         add_timestamp: false
         static_fields:
-          "@service": benthos
+          "@service": redpanda-connect
     asserts:
       - matchSnapshot:
           path: data
@@ -82,7 +82,7 @@ tests:
         format: logfmt
         add_timestamp: false
         static_fields:
-          "@service": benthos
+          "@service": redpanda-connect
       tracing:
         jaeger:
           agent_address: localhost:6831

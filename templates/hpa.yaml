@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "benthos.fullname" . }}
+  name: {{ include "redpanda-connect.fullname" . }}
   labels:
-    {{- include "benthos.labels" . | nindent 4 }}
+    {{- include "redpanda-connect.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "benthos.fullname" . }}
+    name: {{ include "redpanda-connect.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   {{- with .Values.autoscaling.metrics }}

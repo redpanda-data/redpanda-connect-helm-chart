@@ -117,7 +117,7 @@ env: []
 envFrom:
   []
   # - secretRef:
-  #     name: redp
+  #     name: redpanda
 
 resources:
   {}

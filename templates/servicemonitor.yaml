@@ -2,9 +2,9 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "benthos.fullname" . }}
+  name: {{ include "redpanda-connect.fullname" . }}
   labels:
-    {{- include "benthos.labels" . | nindent 4 }}
+    {{- include "redpanda-connect.labels" . | nindent 4 }}
 spec:
   endpoints:
     - interval: {{ .Values.serviceMonitor.interval}}
@@ -24,5 +24,5 @@ spec:
       - {{ .Release.Namespace }}
   selector:
     matchLabels:
-      {{- include "benthos.selectorLabels" . | nindent 6 }}
+      {{- include "redpanda-connect.selectorLabels" . | nindent 6 }}
 {{- end }}

@@ -1,12 +1,12 @@
 can set global options with streams mode:
   1: |
-    benthos.yaml: |-
+    redpanda-connect.yaml: |-
       logger:
         add_timestamp: false
         format: logfmt
         level: INFO
         static_fields:
-          '@service': benthos
+          '@service': redpanda-connect
       metrics:
         statsd:
           address: localhost:8125
@@ -31,17 +31,17 @@ can set global options with streams mode:
         debug_endpoints: false
         enabled: true
         key_file: /my/cert.key
-        root_path: /benthos
+        root_path: /redpanda-connect
 should set config from string:
   1: |
-    benthos.yaml: |
+    redpanda-connect.yaml: |
       http:
         address: 0.0.0.0:4195
         cors:
           enabled: false
         debug_endpoints: false
         enabled: true
-        root_path: /benthos
+        root_path: /redpanda-connect
       input:
         nats_jetstream:
           urls: [ nats://TODO:4222 ]
@@ -75,14 +75,14 @@ should set config from string:
           max_in_flight: 64
 should set config from yaml:
   1: |
-    benthos.yaml: |-
+    redpanda-connect.yaml: |-
       http:
         address: 0.0.0.0:4195
         cors:
           enabled: false
         debug_endpoints: false
         enabled: true
-        root_path: /benthos
+        root_path: /redpanda-connect
       buffer:
         system_window:
           size: 1h
@@ -114,18 +114,18 @@ should set config from yaml:
             } else { deleted() }
 should set default configuration:
   1: |
-    benthos.yaml: |-
+    redpanda-connect.yaml: |-
       http:
         address: 0.0.0.0:4195
         cors:
           enabled: false
         debug_endpoints: false
         enabled: true
-        root_path: /benthos
+        root_path: /redpanda-connect
       input:
         label: "no_config_in"
         generate:
-          mapping: root = "This Benthos instance is unconfigured!"
+          mapping: root = "This Redpanda Connect instance is unconfigured!"
           interval: 1m
       output:
         label: "no_config_out"
@@ -133,7 +133,7 @@ should set default configuration:
           codec: lines
 should set http options:
   1: |
-    benthos.yaml: |-
+    redpanda-connect.yaml: |-
       http:
         address: 127.0.0.0:4095
         basic_auth:
@@ -149,11 +149,11 @@ should set http options:
         debug_endpoints: false
         enabled: true
         key_file: /my/cert.key
-        root_path: /benthos
+        root_path: /redpanda-connect
       input:
         label: "no_config_in"
         generate:
-          mapping: root = "This Benthos instance is unconfigured!"
+          mapping: root = "This Redpanda Connect instance is unconfigured!"
           interval: 1m
       output:
         label: "no_config_out"
@@ -161,24 +161,24 @@ should set http options:
           codec: lines
 should set logging options:
   1: |
-    benthos.yaml: |-
+    redpanda-connect.yaml: |-
       logger:
         add_timestamp: false
         format: logfmt
         level: INFO
         static_fields:
-          '@service': benthos
+          '@service': redpanda-connect
       http:
         address: 0.0.0.0:4195
         cors:
           enabled: false
         debug_endpoints: false
         enabled: true
-        root_path: /benthos
+        root_path: /redpanda-connect
       input:
         label: "no_config_in"
         generate:
-          mapping: root = "This Benthos instance is unconfigured!"
+          mapping: root = "This Redpanda Connect instance is unconfigured!"
           interval: 1m
       output:
         label: "no_config_out"
@@ -186,7 +186,7 @@ should set logging options:
           codec: lines
 should set metrics options:
   1: |
-    benthos.yaml: |-
+    redpanda-connect.yaml: |-
       metrics:
         statsd:
           address: localhost:8125
@@ -197,11 +197,11 @@ should set metrics options:
           enabled: false
         debug_endpoints: false
         enabled: true
-        root_path: /benthos
+        root_path: /redpanda-connect
       input:
         label: "no_config_in"
         generate:
-          mapping: root = "This Benthos instance is unconfigured!"
+          mapping: root = "This Redpanda Connect instance is unconfigured!"
           interval: 1m
       output:
         label: "no_config_out"
@@ -209,7 +209,7 @@ should set metrics options:
           codec: lines
 should set tracing options:
   1: |
-    benthos.yaml: |-
+    redpanda-connect.yaml: |-
       tracer:
         jaeger:
           agent_address: localhost:6831
@@ -221,11 +221,11 @@ should set tracing options:
           enabled: false
         debug_endpoints: false
         enabled: true
-        root_path: /benthos
+        root_path: /redpanda-connect
       input:
         label: "no_config_in"
         generate:
-          mapping: root = "This Benthos instance is unconfigured!"
+          mapping: root = "This Redpanda Connect instance is unconfigured!"
           interval: 1m
       output:
         label: "no_config_out"

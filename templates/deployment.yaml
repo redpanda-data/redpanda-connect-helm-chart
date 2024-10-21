@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "benthos.fullname" . }}
+  name: {{ include "redpanda-connect.fullname" . }}
   labels:
-    {{- include "benthos.labels" . | nindent 4 }}
+    {{- include "redpanda-connect.labels" . | nindent 4 }}
   annotations:
     {{- toYaml .Values.deployment.annotations | nindent 4 }}
 spec:
@@ -12,7 +12,7 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "benthos.selectorLabels" . | nindent 6 }}
+      {{- include "redpanda-connect.selectorLabels" . | nindent 6 }}
   {{- with .Values.updateStrategy }}
   strategy:
     {{- toYaml . | nindent 4 }}
@@ -27,7 +27,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "benthos.selectorLabels" . | nindent 8 }}
+        {{- include "redpanda-connect.selectorLabels" . | nindent 8 }}
         {{- with .Values.deployment.podLabels }}
             {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -36,7 +36,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "benthos.serviceAccountName" . }}
+      serviceAccountName: {{ include "redpanda-connect.serviceAccountName" . }}
       restartPolicy: {{ .Values.deployment.restartPolicy }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
@@ -61,7 +61,7 @@ spec:
           {{- else }}
           args:
             - "-c"
-            - "/benthos.yaml"
+            - "/redpanda-connect.yaml"
             {{- if eq .Values.watch true}}
             - -w
             {{- end }}
@@ -99,8 +99,8 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: config
-              mountPath: "/benthos.yaml"
-              subPath: "benthos.yaml"
+              mountPath: "/redpanda-connect.yaml"
+              subPath: "redpanda-connect.yaml"
               readOnly: true
             {{- if .Values.extraVolumeMounts }}
               {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
@@ -129,7 +129,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ template "benthos.fullname" . }}-config
+            name: {{ template "redpanda-connect.fullname" . }}-config
         {{- if .Values.extraVolumes }}
           {{- toYaml .Values.extraVolumes | nindent 8 }}
         {{- end }}

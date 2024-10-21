@@ -11,7 +11,7 @@ should enable service custom:
         targetPort: 9999
     selector:
       app.kubernetes.io/instance: RELEASE-NAME
-      app.kubernetes.io/name: benthos
+      app.kubernetes.io/name: redpanda-connect
     type: LoadBalancer
 should enable service default:
   1: |
@@ -22,5 +22,5 @@ should enable service default:
         targetPort: http
     selector:
       app.kubernetes.io/instance: RELEASE-NAME
-      app.kubernetes.io/name: benthos
+      app.kubernetes.io/name: redpanda-connect
     type: ClusterIP

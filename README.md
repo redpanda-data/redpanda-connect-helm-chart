@@ -1,3 +1,9 @@
+# :no_entry: Archived :no_entry:
+
+This repository has been **archived** and is no longer actively maintained. This project has been moved to [redpanda-data/helm-charts](https://github.com/redpanda-data/helm-charts/tree/main/charts/connect). Please file issues and make all contributions to the new repository.
+
+For a guide on migrating an existing deployment of this chart to the new chart, please see [the migration guide in the chart](https://github.com/redpanda-data/helm-charts/tree/main/charts/connect/MIGRATION_FROM_BENTHOS.md).
+
 # benthos-helm-chart
 <p align="center" style="text-align: center">
     <img src="./assets/blob.png" width="30%"><br/>
